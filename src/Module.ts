@@ -1,0 +1,18 @@
+import { resolve } from 'path';
+import { Container } from 'inversify';
+
+export abstract class Module {
+
+  public get controllers() {
+    return resolve(this.baseDirectory, 'application/controllers/*.js');
+  }
+
+  public get migrations() {
+    return resolve(this.baseDirectory, 'infrastructure/migrations/*.js');
+  }
+
+  public abstract async initDiContainer(container: Container): Promise<void>;
+
+  protected abstract get baseDirectory(): string;
+
+}
