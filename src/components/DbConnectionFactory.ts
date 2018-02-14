@@ -14,13 +14,17 @@ export class DbConnectionFactory {
   protected dbConfig!: DbConfig;
 
   public async create(modules: Module[]): Promise<Connection> {
-    return createConnection({
+    return createConnection(this.getConfig(modules));
+  }
+
+  public getConfig(modules: Module[]) {
+    return {
       ...this.dbConfig,
       logging: this.dbConfig.logging as any,
       logger: new TypeormLogger,
       migrations: modules.map(module => module.migrations),
       entities: modules.map(module => module.models),
-    });
+    };
   }
 
 }

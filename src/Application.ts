@@ -8,9 +8,7 @@ export class Application {
   @inject(Type.AppLogger)
   protected logger!: Logger;
 
-  constructor(
-    modules: Module[],
-  ) {
+  constructor(modules: Module[]) {
     this.modules = modules;
   }
 

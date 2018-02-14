@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
-const http_errors_1 = require("c7s-http-errors");
+const c7s_http_errors_1 = require("c7s-http-errors");
 const di_1 = require("../di");
 const BAD_REQUEST_CODE = 400;
 const NOT_FOUND_CODE = 404;
@@ -19,7 +19,7 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
     error(error, {}, response, next) {
         const extractedError = this.extractError(error);
         this.logError(extractedError);
-        const coreHttpError = (extractedError instanceof http_errors_1.HttpError)
+        const coreHttpError = (extractedError instanceof c7s_http_errors_1.HttpError)
             ? extractedError
             : this.tryCreateCoreHttpError(extractedError);
         let code;
@@ -54,14 +54,14 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
             case BAD_REQUEST_CODE:
                 const errors = error.errors;
                 result = errors
-                    ? new http_errors_1.CvValidationError(errors)
-                    : new http_errors_1.BadRequestError(error.message);
+                    ? new c7s_http_errors_1.CvValidationError(errors)
+                    : new c7s_http_errors_1.BadRequestError(error.message);
                 break;
             case NOT_FOUND_CODE:
-                result = new http_errors_1.NotFoundError(error.message);
+                result = new c7s_http_errors_1.NotFoundError(error.message);
                 break;
             case INTERNAL_SERVER_CODE:
-                result = new http_errors_1.InternalServerError(error.message);
+                result = new c7s_http_errors_1.InternalServerError(error.message);
                 break;
         }
         return result;
@@ -71,7 +71,7 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
         if (error instanceof routing_controllers_1.HttpError) {
             code = error.httpCode;
         }
-        else if (error instanceof http_errors_1.HttpError) {
+        else if (error instanceof c7s_http_errors_1.HttpError) {
             code = error.code;
         }
         return code;
