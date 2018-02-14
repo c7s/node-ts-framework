@@ -28,11 +28,11 @@ const TypeormLogger_1 = require("../log/TypeormLogger");
 let DbConnectionFactory = class DbConnectionFactory {
     create(modules) {
         return __awaiter(this, void 0, void 0, function* () {
-            return typeorm_1.createConnection(this.getConfig(modules));
+            return typeorm_1.createConnection(Object.assign({ logger: new TypeormLogger_1.TypeormLogger }, this.getConfig(modules)));
         });
     }
     getConfig(modules) {
-        return Object.assign({}, this.dbConfig, { logging: this.dbConfig.logging, logger: new TypeormLogger_1.TypeormLogger, migrations: modules.map(module => module.migrations), entities: modules.map(module => module.models) });
+        return Object.assign({}, this.dbConfig, { logging: this.dbConfig.logging, migrations: modules.map(module => module.migrations), entities: modules.map(module => module.models) });
     }
 };
 __decorate([
