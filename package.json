@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "license": "UNLICENSED",
   "bin": "dist/bin/db-config.js",
+  "scripts": {
+    "compile": "./node_modules/.bin/tsc"
+  },
   "dependencies": {
     "@c7s/config": "git+ssh://git@github.com/c7s/config.git#dev",
     "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#dev",
