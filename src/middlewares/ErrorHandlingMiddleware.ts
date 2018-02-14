@@ -7,7 +7,7 @@ import {
   InternalServerError,
   CvValidationError,
   BadRequestError,
-} from 'c7s-http-errors';
+} from '@c7s/http-errors';
 import { inject, Type } from '../di';
 
 const BAD_REQUEST_CODE = 400;
