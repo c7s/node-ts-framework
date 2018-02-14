@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { DbConfig } from 'c7s-config';
+import { DbConfig } from '@c7s/config';
 import { Module } from '../Module';
 /**
  * TODO timezone

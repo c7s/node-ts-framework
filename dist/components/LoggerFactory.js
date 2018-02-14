@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const log4js = require("log4js");
 const inversify_1 = require("inversify");
-const config_1 = require("c7s-config");
+const config_1 = require("@c7s/config");
 const di_1 = require("../di");
 /**
  * TODO custom logger, timezone
