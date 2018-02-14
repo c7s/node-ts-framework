@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
-const http_errors_1 = require("@c7s/http-errors");
+const http_errors_1 = require("c7s-http-errors");
 const di_1 = require("../di");
 const BAD_REQUEST_CODE = 400;
 const NOT_FOUND_CODE = 404;

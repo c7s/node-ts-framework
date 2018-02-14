@@ -1,6 +1,6 @@
 import * as log4js from 'log4js';
 import { injectable } from 'inversify';
-import { LogConfig, LogCategoryConfig } from '@c7s/config';
+import { LogConfig, LogCategoryConfig } from 'c7s-config';
 import { inject, Type } from '../di';
 
 /**

@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { createExpressServer } from 'routing-controllers';
-import { ServerConfig } from '@c7s/config';
+import { ServerConfig } from 'c7s-config';
 import { Application } from './Application';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { Module } from './Module';
