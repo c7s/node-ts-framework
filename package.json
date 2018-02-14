@@ -2,7 +2,9 @@
   "name": "@c7s/node-framework",
   "version": "0.0.1",
   "license": "UNLICENSED",
-  "bin": "dist/bin/db-config.js",
+  "bin": {
+    "db-config": "dist/bin/db-config.js"
+  },
   "scripts": {
     "compile": "./node_modules/.bin/tsc"
   },
