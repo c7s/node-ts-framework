@@ -11,6 +11,10 @@ export abstract class Module {
     return resolve(this.baseDirectory, 'infrastructure/migrations/*.js');
   }
 
+  public get models() {
+    return resolve(this.baseDirectory, 'infrastructure/models/*.js');
+  }
+
   public abstract async initDiContainer(container: Container): Promise<void>;
 
   protected abstract get baseDirectory(): string;

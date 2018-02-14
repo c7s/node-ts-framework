@@ -2,19 +2,23 @@
   "name": "@c7s/node-framework",
   "version": "0.0.1",
   "license": "UNLICENSED",
+  "bin": "dist/bin/db-config.js",
   "dependencies": {
     "@c7s/config": "git+ssh://git@github.com/c7s/config.git#dev",
+    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#dev",
     "inversify": "4.10.0",
     "inversify-binding-decorators": "3.2.0",
     "inversify-inject-decorators": "3.1.0",
+    "log4js": "2.5.3",
     "reflect-metadata": "0.1.12",
-    "routing-controllers": "0.7.6"
+    "routing-controllers": "0.7.6",
+    "typeorm": "0.1.12"
   },
   "devDependencies": {
     "@types/express": "4.11.1",
     "@types/node": "9.4.1",
-    "typescript": "2.7.1",
     "tslint": "5.9.1",
-    "tslint-config-airbnb": "5.6.0"
+    "tslint-config-airbnb": "5.6.0",
+    "typescript": "2.7.1"
   }
 }
