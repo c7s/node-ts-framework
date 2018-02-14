@@ -1,19 +1,19 @@
 import { injectable } from 'inversify';
-import { createConnection } from 'typeorm';
+import { createConnection, Connection } from 'typeorm';
 import { DbConfig } from '@c7s/config';
 import { inject, Type } from '../di';
 import { Module } from '../Module';
 import { TypeormLogger } from '../log/TypeormLogger';
 
 /**
- * TODO custom logger, timezone
+ * TODO timezone
  */
 @injectable()
 export class DbConnectionFactory {
   @inject(Type.DbConfig)
   protected dbConfig!: DbConfig;
 
-  public create(modules: Module[]) {
+  public async create(modules: Module[]): Promise<Connection> {
     return createConnection({
       ...this.dbConfig,
       logging: this.dbConfig.logging as any,
