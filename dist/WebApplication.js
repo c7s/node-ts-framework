@@ -31,11 +31,11 @@ class WebApplication extends Application_1.Application {
             middlewares,
             defaultErrorHandler: false,
         });
-        this.express.use(new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory().create());
     }
     run() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.init();
+            this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
             const { host, port } = this.config;
             return new Promise((resolve, reject) => {
                 this.express.listen({ host, port }, (err) => {

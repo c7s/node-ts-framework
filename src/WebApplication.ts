@@ -24,11 +24,12 @@ export class WebApplication extends Application {
       middlewares,
       defaultErrorHandler: false,
     });
-    this.express.use(new AccessLogMiddlewareFactory().create());
   }
 
   public async run(): Promise<void> {
     await this.init();
+
+    this.express.use((new AccessLogMiddlewareFactory).create());
 
     const { host, port } = this.config;
     return new Promise<void>((resolve, reject) => {
