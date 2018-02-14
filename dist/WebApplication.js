@@ -17,6 +17,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const express = require("express");
 const routing_controllers_1 = require("routing-controllers");
 const config_1 = require("@c7s/config");
 const Application_1 = require("./Application");
@@ -25,17 +26,18 @@ const di_1 = require("./di");
 class WebApplication extends Application_1.Application {
     constructor(modules, middlewares) {
         super(modules);
-        const controllers = modules.map(module => module.controllers);
-        this.express = routing_controllers_1.createExpressServer({
-            controllers,
-            middlewares,
-            defaultErrorHandler: false,
-        });
+        this.middlewares = middlewares;
+        this.express = express();
     }
     run() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.init();
             this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
+            routing_controllers_1.useExpressServer(this.express, {
+                controllers: this.modules.map(module => module.controllers),
+                middlewares: this.middlewares,
+                defaultErrorHandler: false,
+            });
             const { host, port } = this.config;
             return new Promise((resolve, reject) => {
                 this.express.listen({ host, port }, (err) => {
