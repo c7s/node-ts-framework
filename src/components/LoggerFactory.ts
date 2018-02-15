@@ -3,9 +3,6 @@ import { injectable } from 'inversify';
 import { LogConfig, LogCategoryConfig } from '@c7s/config';
 import { inject, Type } from '../di';
 
-/**
- * TODO custom logger, timezone
- */
 @injectable()
 export class LoggerFactory {
   @inject(Type.LogConfig)
