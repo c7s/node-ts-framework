@@ -1,9 +1,9 @@
 # NodeJS and Typescript REST microservice framework
 
-* Controller decorators from routing-controllers
-* Dependency injection container from inversify
-* Logging based on log4js
-* Database support based on typeorm
+* Controller decorators from [routing-controllers](https://github.com/typestack/routing-controllers)
+* Dependency injection container from [inversify](https://github.com/inversify/InversifyJS)
+* Logging based on [log4js](https://github.com/log4js-node/log4js-node)
+* Database support based on [typeorm](https://github.com/typeorm/typeorm)
 * Modules support
 * Unified AJAX error responses
 
