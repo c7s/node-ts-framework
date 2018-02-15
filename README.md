@@ -7,8 +7,11 @@
 * Modules support
 * Unified AJAX error responses
 
-Boilerplate https://github.com/c7s/node-ts-microservice-boilerplate
-Yeoman generator https://github.com/c7s/generator-node-ts-microservice
+[Boilerplate](https://github.com/c7s/node-ts-microservice-boilerplate)
+
+[Yeoman generator](https://github.com/c7s/generator-node-ts-microservice)
+
+[Performance tests](https://github.com/melfa/node-framework-load-test) for routing-controllers, typeorm, log4js.
 
 
 ## Usage
