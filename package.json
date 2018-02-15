@@ -1,5 +1,5 @@
 {
-  "name": "c7s-node-framework",
+  "name": "@c7s/node-ts-framework",
   "version": "0.0.1",
   "license": "UNLICENSED",
   "main": "dist/index.js",
