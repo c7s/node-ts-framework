@@ -6,5 +6,5 @@ export declare class Application {
     constructor(modules: Module[]);
     init(): Promise<void[]>;
     end(): Promise<void[]>;
-    run(callback: () => Promise<any>): Promise<void>;
+    run(callback: Function): Promise<void>;
 }

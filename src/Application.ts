@@ -24,12 +24,13 @@ export class Application {
     );
   }
 
-  public async run(callback: () => Promise<any>) {
-    await Promise.all([
-      this.init(),
-      callback(),
-      this.end(),
-    ]);
+  public async run(callback: Function) {
+    await this.init();
+    const result = callback();
+    if (result instanceof Promise) {
+      await result;
+    }
+    await this.end();
   }
 
 }

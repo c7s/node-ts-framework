@@ -34,11 +34,12 @@ class Application {
     }
     run(callback) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield Promise.all([
-                this.init(),
-                callback(),
-                this.end(),
-            ]);
+            yield this.init();
+            const result = callback();
+            if (result instanceof Promise) {
+                yield result;
+            }
+            yield this.end();
         });
     }
 }
