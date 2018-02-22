@@ -4,6 +4,8 @@ import { WebApplication } from './WebApplication';
 export class ClusteredWebApplication extends WebApplication {
 
   public async run() {
+    await this.init();
+
     if (cluster.isMaster) {
       const workersCount = this.config.workers;
       this.logger.info(`Starting ${workersCount} workers`);

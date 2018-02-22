@@ -14,6 +14,7 @@ class ClusteredWebApplication extends WebApplication_1.WebApplication {
     run() {
         const _super = name => super[name];
         return __awaiter(this, void 0, void 0, function* () {
+            yield this.init();
             if (cluster.isMaster) {
                 const workersCount = this.config.workers;
                 this.logger.info(`Starting ${workersCount} workers`);
