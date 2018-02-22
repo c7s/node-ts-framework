@@ -8,18 +8,30 @@ export class Application {
   @inject(Type.AppLogger)
   protected logger!: Logger;
 
+  protected isInitialized: boolean = false;
+
   constructor(modules: Module[]) {
     this.modules = modules;
   }
 
   public async init() {
-    return Promise.all(
+    if (this.isInitialized) {
+      return;
+    }
+
+    await Promise.all(
       this.modules.map(module => module.initDiContainer(container)),
     );
+
+    this.isInitialized = true;
   }
 
   public async end() {
-    return Promise.all(
+    if (!this.isInitialized) {
+      return;
+    }
+
+    await Promise.all(
       this.modules.map(module => module.end(container)),
     );
   }

@@ -20,16 +20,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const di_1 = require("./di");
 class Application {
     constructor(modules) {
+        this.isInitialized = false;
         this.modules = modules;
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
-            return Promise.all(this.modules.map(module => module.initDiContainer(di_1.container)));
+            if (this.isInitialized) {
+                return;
+            }
+            yield Promise.all(this.modules.map(module => module.initDiContainer(di_1.container)));
+            this.isInitialized = true;
         });
     }
     end() {
         return __awaiter(this, void 0, void 0, function* () {
-            return Promise.all(this.modules.map(module => module.end(di_1.container)));
+            if (!this.isInitialized) {
+                return;
+            }
+            yield Promise.all(this.modules.map(module => module.end(di_1.container)));
         });
     }
     run(callback) {
