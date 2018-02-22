@@ -27,6 +27,20 @@ class Application {
             return Promise.all(this.modules.map(module => module.initDiContainer(di_1.container)));
         });
     }
+    end() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return Promise.all(this.modules.map(module => module.end(di_1.container)));
+        });
+    }
+    run(callback) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield Promise.all([
+                this.init(),
+                callback(),
+                this.end(),
+            ]);
+        });
+    }
 }
 __decorate([
     di_1.inject(di_1.Type.AppLogger),

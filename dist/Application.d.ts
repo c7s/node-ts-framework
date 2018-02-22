@@ -5,4 +5,6 @@ export declare class Application {
     protected logger: Logger;
     constructor(modules: Module[]);
     init(): Promise<void[]>;
+    end(): Promise<void[]>;
+    run(callback: () => Promise<any>): Promise<void>;
 }

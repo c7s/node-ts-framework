@@ -18,4 +18,18 @@ export class Application {
     );
   }
 
+  public async end() {
+    return Promise.all(
+      this.modules.map(module => module.end(container)),
+    );
+  }
+
+  public async run(callback: () => Promise<any>) {
+    await Promise.all([
+      this.init(),
+      callback(),
+      this.end(),
+    ]);
+  }
+
 }

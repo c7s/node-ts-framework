@@ -13,9 +13,6 @@ const log4js = require("log4js");
 const inversify_1 = require("inversify");
 const config_1 = require("@c7s/config");
 const di_1 = require("../di");
-/**
- * TODO custom logger, timezone
- */
 let LoggerFactory = class LoggerFactory {
     constructor() {
         log4js.configure({

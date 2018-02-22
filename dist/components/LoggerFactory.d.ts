@@ -1,8 +1,5 @@
 import * as log4js from 'log4js';
 import { LogConfig, LogCategoryConfig } from '@c7s/config';
-/**
- * TODO custom logger, timezone
- */
 export declare class LoggerFactory {
     protected logConfig: LogConfig;
     constructor();

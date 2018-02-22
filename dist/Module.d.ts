@@ -4,5 +4,6 @@ export declare abstract class Module {
     readonly migrations: string;
     readonly models: string;
     abstract initDiContainer(container: Container): Promise<void>;
+    abstract end(container: Container): Promise<void>;
     protected readonly abstract baseDirectory: string;
 }
