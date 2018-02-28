@@ -33,6 +33,7 @@ export class WebApplication extends Application {
         controllers: this.modules.map(module => module.controllers),
         middlewares: this.middlewares,
         defaultErrorHandler: false,
+        defaults: { paramOptions: { required: true } },
       },
     );
 
