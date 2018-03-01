@@ -7,4 +7,5 @@ export declare const Type: {
     ServiceDiscovery: symbol;
     AppLogger: symbol;
     AccessLogger: symbol;
+    DbLogger: symbol;
 };

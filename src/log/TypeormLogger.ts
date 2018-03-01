@@ -6,13 +6,13 @@ import { inject, Type } from '../di';
  * Message formatting code copy-pasted from typeorm/src/logger/FileLogger
  */
 export class TypeormLogger implements Logger {
-  @inject(Type.AppLogger)
+  @inject(Type.DbLogger)
   protected logger!: Log4jsLogger;
 
   public logQuery(query: string, parameters: any[] | undefined) {
     const sql = query
       + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
-    this.logger.info('[QUERY]: ' + sql);
+    this.logger.debug('[QUERY]: ' + sql);
   }
 
   public logQueryError(error: string, query: string, parameters: any[] | undefined) {
@@ -29,7 +29,7 @@ export class TypeormLogger implements Logger {
   }
 
   public logSchemaBuild(message: string) {
-    this.logger.info(message);
+    this.logger.debug(message);
   }
 
   public logMigration(message: string) {
