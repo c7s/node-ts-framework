@@ -10,7 +10,8 @@
     "noUnusedParameters": true,
     "strict": true,
     "sourceMap": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "declaration": true
   },
   "include": [
     "src/**/*.ts"

@@ -1,7 +1,6 @@
 export const Type = {
-  ConfigSource: Symbol('ConfigSource'),
-
   ServerConfig: Symbol('ServerConfig'),
+  LogConfig: Symbol('LogConfig'),
 
   DbConfig: Symbol('DbConfig'),
   DbConnection: Symbol('DbConnection'),
@@ -9,5 +8,6 @@ export const Type = {
   ServicesConfig: Symbol('ServicesConfig'),
   ServiceDiscovery: Symbol('ServiceDiscovery'),
 
-  MainLogger: Symbol('MainLogger'),
+  AppLogger: Symbol('AppLogger'),
+  AccessLogger: Symbol('AccessLogger'),
 };

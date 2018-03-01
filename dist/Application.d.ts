@@ -1,0 +1,11 @@
+import { Logger } from 'log4js';
+import { Module } from './Module';
+export declare class Application {
+    protected modules: Module[];
+    protected logger: Logger;
+    protected isInitialized: boolean;
+    constructor(modules: Module[]);
+    init(): Promise<void>;
+    end(): Promise<void>;
+    run(callback: Function): Promise<void>;
+}
