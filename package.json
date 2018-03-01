@@ -8,8 +8,8 @@
     "compile": "./node_modules/.bin/tsc"
   },
   "dependencies": {
-    "@c7s/config": "git+ssh://git@github.com/c7s/config.git#release-20180228-PB-3122",
-    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#release-20180228-PB-3122",
+    "@c7s/config": "git+ssh://git@github.com/c7s/config.git#dev",
+    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#dev",
     "inversify": "4.10.0",
     "inversify-binding-decorators": "3.2.0",
     "inversify-inject-decorators": "3.1.0",
