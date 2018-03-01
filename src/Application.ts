@@ -19,9 +19,9 @@ export class Application {
       return;
     }
 
-    await Promise.all(
-      this.modules.map(module => module.initDiContainer(container)),
-    );
+    for (const module of this.modules) {
+      await module.initDiContainer(container);
+    }
 
     this.isInitialized = true;
   }
