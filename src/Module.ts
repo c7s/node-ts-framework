@@ -15,7 +15,10 @@ export abstract class Module {
     return resolve(this.baseDirectory, 'infrastructure/models/*.js');
   }
 
-  public abstract async initDiContainer(container: Container): Promise<void>;
+  public abstract async initDiContainer(
+    container: Container,
+    allApplicationModules: Module[],
+  ): Promise<void>;
   public abstract async end(container: Container): Promise<void>;
 
   protected abstract get baseDirectory(): string;

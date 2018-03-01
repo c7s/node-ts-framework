@@ -29,7 +29,7 @@ class Application {
                 return;
             }
             for (const module of this.modules) {
-                yield module.initDiContainer(di_1.container);
+                yield module.initDiContainer(di_1.container, this.modules);
             }
             this.isInitialized = true;
         });

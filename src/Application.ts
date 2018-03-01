@@ -20,7 +20,7 @@ export class Application {
     }
 
     for (const module of this.modules) {
-      await module.initDiContainer(container);
+      await module.initDiContainer(container, this.modules);
     }
 
     this.isInitialized = true;
