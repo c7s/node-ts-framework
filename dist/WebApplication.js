@@ -37,7 +37,6 @@ class WebApplication extends Application_1.Application {
                 controllers: this.modules.map(module => module.controllers),
                 middlewares: this.middlewares,
                 defaultErrorHandler: false,
-                defaults: { paramOptions: { required: true } },
             });
             const { host, port } = this.config;
             return new Promise((resolve, reject) => {
