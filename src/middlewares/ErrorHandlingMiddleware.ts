@@ -61,9 +61,9 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
 
     switch (code) {
       case BAD_REQUEST_CODE:
-        const errors = (<any>error).errors;
+        const errors = (error as any).errors;
         result = errors
-          ? new ClassValidatorError(errors, errors.paramName)
+          ? new ClassValidatorError(errors, (error as any).paramName)
           : new BadRequestError(error.message);
         break;
 

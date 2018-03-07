@@ -54,7 +54,7 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
             case BAD_REQUEST_CODE:
                 const errors = error.errors;
                 result = errors
-                    ? new http_errors_1.ClassValidatorError(errors, errors.paramName)
+                    ? new http_errors_1.ClassValidatorError(errors, error.paramName)
                     : new http_errors_1.BadRequestError(error.message);
                 break;
             case NOT_FOUND_CODE:
