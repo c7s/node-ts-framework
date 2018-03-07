@@ -15,7 +15,7 @@
     "inversify-inject-decorators": "3.1.0",
     "log4js": "2.5.3",
     "reflect-metadata": "0.1.12",
-    "routing-controllers": "0.7.6",
+    "routing-controllers": "0.7.7",
     "typeorm": "0.1.16"
   },
   "devDependencies": {
