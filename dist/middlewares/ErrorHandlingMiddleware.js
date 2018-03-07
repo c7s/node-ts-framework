@@ -21,7 +21,7 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
         this.logError(extractedError);
         const coreHttpError = (extractedError instanceof http_errors_1.HttpError)
             ? extractedError
-            : this.tryCreateCoreHttpError(extractedError);
+            : this.createCoreHttpError(extractedError);
         let code;
         let data;
         if (coreHttpError) {
@@ -47,14 +47,14 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
             ? this.logger.fatal(error)
             : this.logger.error(error);
     }
-    tryCreateCoreHttpError(error) {
+    createCoreHttpError(error) {
         let result = null;
         const code = this.identifyHttpCode(error);
         switch (code) {
             case BAD_REQUEST_CODE:
                 const errors = error.errors;
                 result = errors
-                    ? new http_errors_1.CvValidationError(errors)
+                    ? new http_errors_1.ClassValidatorError(errors, errors.paramName)
                     : new http_errors_1.BadRequestError(error.message);
                 break;
             case NOT_FOUND_CODE:

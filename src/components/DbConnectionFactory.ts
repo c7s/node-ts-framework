@@ -23,7 +23,7 @@ export class DbConnectionFactory {
   public getConfig(modules: Module[]) {
     return {
       ...this.dbConfig,
-      logging: this.dbConfig.logging as any,
+      logging: (this.dbConfig as any).logging,
       migrations: modules.map(module => module.migrations),
       entities: modules.map(module => module.models),
     };

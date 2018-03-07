@@ -5,7 +5,7 @@ import {
   HttpError as CoreHttpError,
   NotFoundError,
   InternalServerError,
-  CvValidationError,
+  ClassValidatorError,
   BadRequestError,
 } from '@c7s/http-errors';
 import { inject, Type } from '../di';
@@ -25,7 +25,7 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
 
     const coreHttpError = (extractedError instanceof CoreHttpError)
       ? extractedError
-      : this.tryCreateCoreHttpError(extractedError);
+      : this.createCoreHttpError(extractedError);
 
     let code: number;
     let data: any;
@@ -55,7 +55,7 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
       : this.logger.error(error as any);
   }
 
-  protected tryCreateCoreHttpError(error: Error): CoreHttpError | null {
+  protected createCoreHttpError(error: Error): CoreHttpError | null {
     let result = null;
     const code = this.identifyHttpCode(error);
 
@@ -63,7 +63,7 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
       case BAD_REQUEST_CODE:
         const errors = (<any>error).errors;
         result = errors
-          ? new CvValidationError(errors)
+          ? new ClassValidatorError(errors, errors.paramName)
           : new BadRequestError(error.message);
         break;
 

@@ -7,6 +7,6 @@ export declare class ErrorHandlingMiddleware implements ErrorHandlingMiddleware 
     error(error: Error, {}: Request, response: Response, next: NextFunction): void;
     protected extractError(error: Error): Error;
     protected logError(error: Error): void;
-    protected tryCreateCoreHttpError(error: Error): CoreHttpError | null;
+    protected createCoreHttpError(error: Error): CoreHttpError | null;
     protected identifyHttpCode(error: Error): number;
 }
