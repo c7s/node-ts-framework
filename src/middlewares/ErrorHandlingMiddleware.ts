@@ -1,6 +1,7 @@
 import { Logger } from 'log4js';
 import { Request, Response, NextFunction } from 'express';
 import { Middleware, HttpError } from 'routing-controllers';
+import { ValidationError } from 'class-validator';
 import {
   HttpError as CoreHttpError,
   NotFoundError,
@@ -63,7 +64,7 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
       case BAD_REQUEST_CODE:
         const errors = (error as any).errors;
         result = errors
-          ? new ClassValidatorError(errors, (error as any).paramName)
+          ? this.createValidationError(errors, (error as any).paramName)
           : new BadRequestError(error.message);
         break;
 
@@ -87,6 +88,10 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
       code = error.code;
     }
     return code;
+  }
+
+  protected createValidationError(errors: ValidationError[], envelopeName: string) {
+    return new ClassValidatorError(errors, envelopeName);
   }
 
 }
