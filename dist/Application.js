@@ -28,7 +28,9 @@ class Application {
             if (this.isInitialized) {
                 return;
             }
-            yield Promise.all(this.modules.map(module => module.initDiContainer(di_1.container)));
+            for (const module of this.modules) {
+                yield module.initDiContainer(di_1.container, this.modules);
+            }
             this.isInitialized = true;
         });
     }

@@ -8,21 +8,21 @@
     "compile": "./node_modules/.bin/tsc"
   },
   "dependencies": {
-    "@c7s/config": "git+ssh://git@github.com/c7s/config.git#release-20180228-PB-3122",
-    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#release-20180228-PB-3122",
-    "inversify": "4.10.0",
+    "@c7s/config": "git+ssh://git@github.com/c7s/config.git#release-20180306-PB-3134",
+    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#release-20180306-PB-3134",
+    "inversify": "4.11.1",
     "inversify-binding-decorators": "3.2.0",
     "inversify-inject-decorators": "3.1.0",
     "log4js": "2.5.3",
     "reflect-metadata": "0.1.12",
-    "routing-controllers": "0.7.6",
-    "typeorm": "0.1.12"
+    "routing-controllers": "0.7.7",
+    "typeorm": "0.1.16"
   },
   "devDependencies": {
     "@types/express": "4.11.1",
-    "@types/node": "9.4.1",
+    "@types/node": "8.0.46",
     "tslint": "5.9.1",
     "tslint-config-airbnb": "5.7.0",
-    "typescript": "2.7.1"
+    "typescript": "2.7.2"
   }
 }

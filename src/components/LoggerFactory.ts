@@ -16,6 +16,7 @@ export class LoggerFactory {
       },
       categories: {
         default: { appenders: ['everything'], level: this.logConfig.main.level },
+        db: { appenders: ['everything'], level: this.logConfig.main.level },
         access: { appenders: ['access'], level: this.logConfig.access.level },
       },
     });

@@ -17,7 +17,7 @@ class TypeormLogger {
     logQuery(query, parameters) {
         const sql = query
             + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
-        this.logger.info('[QUERY]: ' + sql);
+        this.logger.debug('[QUERY]: ' + sql);
     }
     logQueryError(error, query, parameters) {
         const sql = query
@@ -31,7 +31,7 @@ class TypeormLogger {
         this.logger.warn(`[SLOW QUERY: ${time} ms]: ` + sql);
     }
     logSchemaBuild(message) {
-        this.logger.info(message);
+        this.logger.debug(message);
     }
     logMigration(message) {
         this.logger.info(message);
@@ -41,7 +41,7 @@ class TypeormLogger {
     }
 }
 __decorate([
-    di_1.inject(di_1.Type.AppLogger),
+    di_1.inject(di_1.Type.DbLogger),
     __metadata("design:type", Object)
 ], TypeormLogger.prototype, "logger", void 0);
 exports.TypeormLogger = TypeormLogger;

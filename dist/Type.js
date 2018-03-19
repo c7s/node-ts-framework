@@ -9,5 +9,6 @@ exports.Type = {
     ServiceDiscovery: Symbol('ServiceDiscovery'),
     AppLogger: Symbol('AppLogger'),
     AccessLogger: Symbol('AccessLogger'),
+    DbLogger: Symbol('DbLogger'),
 };
 //# sourceMappingURL=Type.js.map

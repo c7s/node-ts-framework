@@ -1,11 +1,12 @@
 import { Logger } from 'log4js';
 import { Request, Response, NextFunction } from 'express';
 import { Middleware, HttpError } from 'routing-controllers';
+import { ValidationError } from 'class-validator';
 import {
   HttpError as CoreHttpError,
   NotFoundError,
   InternalServerError,
-  CvValidationError,
+  ClassValidatorError,
   BadRequestError,
 } from '@c7s/http-errors';
 import { inject, Type } from '../di';
@@ -25,7 +26,7 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
 
     const coreHttpError = (extractedError instanceof CoreHttpError)
       ? extractedError
-      : this.tryCreateCoreHttpError(extractedError);
+      : this.createCoreHttpError(extractedError);
 
     let code: number;
     let data: any;
@@ -55,15 +56,15 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
       : this.logger.error(error as any);
   }
 
-  protected tryCreateCoreHttpError(error: Error): CoreHttpError | null {
+  protected createCoreHttpError(error: Error): CoreHttpError | null {
     let result = null;
     const code = this.identifyHttpCode(error);
 
     switch (code) {
       case BAD_REQUEST_CODE:
-        const errors = (<any>error).errors;
+        const errors = (error as any).errors;
         result = errors
-          ? new CvValidationError(errors)
+          ? this.createValidationError(errors, (error as any).paramName)
           : new BadRequestError(error.message);
         break;
 
@@ -87,6 +88,10 @@ export class ErrorHandlingMiddleware implements ErrorHandlingMiddleware {
       code = error.code;
     }
     return code;
+  }
+
+  protected createValidationError(errors: ValidationError[], envelopeName: string) {
+    return new ClassValidatorError(errors, envelopeName);
   }
 
 }
