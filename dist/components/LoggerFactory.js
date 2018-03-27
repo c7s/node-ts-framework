@@ -11,11 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const log4js = require("log4js");
 const inversify_1 = require("inversify");
+const deepExtend = require("deep-extend");
 const config_1 = require("@c7s/config");
 const di_1 = require("../di");
 let LoggerFactory = class LoggerFactory {
-    constructor() {
-        log4js.configure({
+    constructor(log4jsConfig) {
+        log4js.configure(deepExtend({
             appenders: {
                 everything: this.getAppenderFromConfig(this.logConfig.main),
                 access: this.getAppenderFromConfig(this.logConfig.access),
@@ -25,7 +26,7 @@ let LoggerFactory = class LoggerFactory {
                 db: { appenders: ['everything'], level: this.logConfig.main.level },
                 access: { appenders: ['access'], level: this.logConfig.access.level },
             },
-        });
+        }, log4jsConfig));
     }
     create(category) {
         return log4js.getLogger(category);
@@ -33,9 +34,17 @@ let LoggerFactory = class LoggerFactory {
     getAppenderFromConfig(categoryConfig) {
         return {
             file: {
+                type: 'file',
+                filename: categoryConfig.filename,
+                maxLogSize: 50 * 1024 * 1024,
+                backups: 10,
+                compress: true,
+            },
+            dateFile: {
                 type: 'dateFile',
                 filename: categoryConfig.filename,
                 daysToKeep: 10,
+                compress: true,
             },
             console: {
                 type: 'console',
@@ -49,7 +58,7 @@ __decorate([
 ], LoggerFactory.prototype, "logConfig", void 0);
 LoggerFactory = __decorate([
     inversify_1.injectable(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [Object])
 ], LoggerFactory);
 exports.LoggerFactory = LoggerFactory;
 //# sourceMappingURL=LoggerFactory.js.map
