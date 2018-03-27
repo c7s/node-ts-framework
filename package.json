@@ -10,7 +10,6 @@
   "dependencies": {
     "@c7s/config": "git+ssh://git@github.com/c7s/config.git#dev",
     "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#dev",
-    "deep-extend": "0.5.0",
     "inversify": "4.11.1",
     "inversify-binding-decorators": "3.2.0",
     "inversify-inject-decorators": "3.1.0",
@@ -20,7 +19,6 @@
     "typeorm": "0.1.16"
   },
   "devDependencies": {
-    "@types/deep-extend": "0.4.31",
     "@types/express": "4.11.1",
     "@types/node": "8.0.46",
     "tslint": "5.9.1",

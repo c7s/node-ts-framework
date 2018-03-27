@@ -1,6 +1,5 @@
 import * as log4js from 'log4js';
 import { injectable } from 'inversify';
-import * as deepExtend from 'deep-extend';
 import { LogConfig, LogCategoryConfig } from '@c7s/config';
 import { inject, Type } from '../di';
 
@@ -9,28 +8,40 @@ export class LoggerFactory {
   @inject(Type.LogConfig)
   protected logConfig!: LogConfig;
 
-  constructor(log4jsConfig?: log4js.Configuration) {
-    log4js.configure(deepExtend(
-      {
-        appenders: {
-          everything: LoggerFactory.getAppenderFromConfig(this.logConfig.main),
-          access: LoggerFactory.getAppenderFromConfig(this.logConfig.access),
-        },
-        categories: {
-          default: { appenders: ['everything'], level: this.logConfig.main.level },
-          db: { appenders: ['everything'], level: this.logConfig.main.level },
-          access: { appenders: ['access'], level: this.logConfig.access.level },
-        },
-      },
-      log4jsConfig,
-    ));
-  }
+  protected isLoggerLibInitialized = false;
 
   public create(category: string) {
+    if (!this.isLoggerLibInitialized) {
+      this.initializeLoggerLib();
+    }
     return log4js.getLogger(category);
   }
 
-  protected static getAppenderFromConfig(categoryConfig: LogCategoryConfig) {
+  protected initializeLoggerLib() {
+    if (this.isLoggerLibInitialized) {
+      return;
+    }
+
+    log4js.configure(this.getLoggerLibConfig());
+
+    this.isLoggerLibInitialized = true;
+  }
+
+  protected getLoggerLibConfig() {
+    return {
+      appenders: {
+        everything: this.getAppenderFromConfig(this.logConfig.main),
+        access: this.getAppenderFromConfig(this.logConfig.access),
+      },
+      categories: {
+        default: { appenders: ['everything'], level: this.logConfig.main.level },
+        db: { appenders: ['everything'], level: this.logConfig.main.level },
+        access: { appenders: ['access'], level: this.logConfig.access.level },
+      },
+    };
+  }
+
+  protected getAppenderFromConfig(categoryConfig: LogCategoryConfig) {
     return {
       file: {
         type: 'file',
