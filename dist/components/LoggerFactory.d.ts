@@ -4,7 +4,7 @@ export declare class LoggerFactory {
     protected logConfig: LogConfig;
     constructor(log4jsConfig?: log4js.Configuration);
     create(category: string): log4js.Logger;
-    protected getAppenderFromConfig(categoryConfig: LogCategoryConfig): {
+    protected static getAppenderFromConfig(categoryConfig: LogCategoryConfig): {
         type: string;
         filename: string;
         maxLogSize: number;

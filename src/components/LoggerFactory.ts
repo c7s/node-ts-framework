@@ -13,8 +13,8 @@ export class LoggerFactory {
     log4js.configure(deepExtend(
       {
         appenders: {
-          everything: this.getAppenderFromConfig(this.logConfig.main),
-          access: this.getAppenderFromConfig(this.logConfig.access),
+          everything: LoggerFactory.getAppenderFromConfig(this.logConfig.main),
+          access: LoggerFactory.getAppenderFromConfig(this.logConfig.access),
         },
         categories: {
           default: { appenders: ['everything'], level: this.logConfig.main.level },
@@ -30,7 +30,7 @@ export class LoggerFactory {
     return log4js.getLogger(category);
   }
 
-  protected getAppenderFromConfig(categoryConfig: LogCategoryConfig) {
+  protected static getAppenderFromConfig(categoryConfig: LogCategoryConfig) {
     return {
       file: {
         type: 'file',
