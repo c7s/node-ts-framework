@@ -9,7 +9,7 @@ export class LoggerFactory {
   @inject(Type.LogConfig)
   protected logConfig!: LogConfig;
 
-  constructor(log4jsConfig: log4js.Configuration) {
+  constructor(log4jsConfig?: log4js.Configuration) {
     log4js.configure(deepExtend(
       {
         appenders: {
