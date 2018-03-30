@@ -8,6 +8,7 @@ import { DbConnectionFactory } from './components/DbConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
+import { RejectNanParamsMiddleware } from './middlewares/RejectNanParamsMiddleware';
 export { Application, WebApplication, ClusteredWebApplication, Module, di, Environment };
 export declare const components: {
     DbConnectionFactory: typeof DbConnectionFactory;
@@ -16,4 +17,5 @@ export declare const components: {
 export declare const middlewares: {
     AccessLogMiddlewareFactory: typeof AccessLogMiddlewareFactory;
     ErrorHandlingMiddleware: typeof ErrorHandlingMiddleware;
+    RejectNanParamsMiddleware: typeof RejectNanParamsMiddleware;
 };
