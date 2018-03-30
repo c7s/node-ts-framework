@@ -11,6 +11,11 @@ const http_errors_1 = require("@c7s/http-errors");
 let RejectNanParamsMiddleware = class RejectNanParamsMiddleware {
     use(request, {}, next) {
         for (const param in Object.keys(request.params)) {
+            console.log('param');
+            console.log(param);
+            console.log(request.params[param]);
+            console.log(typeof request.params[param]);
+            console.log(isNaN(request.params[param]));
             if ('number' === typeof request.params[param] && isNaN(request.params[param])) {
                 throw new http_errors_1.BadRequestError(`Route parameter ${param} must be a number`);
             }
