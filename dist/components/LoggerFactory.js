@@ -15,7 +15,23 @@ const config_1 = require("@c7s/config");
 const di_1 = require("../di");
 let LoggerFactory = class LoggerFactory {
     constructor() {
-        log4js.configure({
+        this.isLoggerLibInitialized = false;
+    }
+    create(category) {
+        if (!this.isLoggerLibInitialized) {
+            this.initializeLoggerLib();
+        }
+        return log4js.getLogger(category);
+    }
+    initializeLoggerLib() {
+        if (this.isLoggerLibInitialized) {
+            return;
+        }
+        log4js.configure(this.getLoggerLibConfig());
+        this.isLoggerLibInitialized = true;
+    }
+    getLoggerLibConfig() {
+        return {
             appenders: {
                 everything: this.getAppenderFromConfig(this.logConfig.main),
                 access: this.getAppenderFromConfig(this.logConfig.access),
@@ -25,17 +41,22 @@ let LoggerFactory = class LoggerFactory {
                 db: { appenders: ['everything'], level: this.logConfig.main.level },
                 access: { appenders: ['access'], level: this.logConfig.access.level },
             },
-        });
-    }
-    create(category) {
-        return log4js.getLogger(category);
+        };
     }
     getAppenderFromConfig(categoryConfig) {
         return {
             file: {
+                type: 'file',
+                filename: categoryConfig.filename,
+                maxLogSize: 50 * 1024 * 1024,
+                backups: 10,
+                compress: true,
+            },
+            dateFile: {
                 type: 'dateFile',
                 filename: categoryConfig.filename,
                 daysToKeep: 10,
+                compress: true,
             },
             console: {
                 type: 'console',
@@ -48,8 +69,7 @@ __decorate([
     __metadata("design:type", config_1.LogConfig)
 ], LoggerFactory.prototype, "logConfig", void 0);
 LoggerFactory = __decorate([
-    inversify_1.injectable(),
-    __metadata("design:paramtypes", [])
+    inversify_1.injectable()
 ], LoggerFactory);
 exports.LoggerFactory = LoggerFactory;
 //# sourceMappingURL=LoggerFactory.js.map

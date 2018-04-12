@@ -8,8 +8,27 @@ export class LoggerFactory {
   @inject(Type.LogConfig)
   protected logConfig!: LogConfig;
 
-  constructor() {
-    log4js.configure({
+  protected isLoggerLibInitialized = false;
+
+  public create(category: string) {
+    if (!this.isLoggerLibInitialized) {
+      this.initializeLoggerLib();
+    }
+    return log4js.getLogger(category);
+  }
+
+  protected initializeLoggerLib() {
+    if (this.isLoggerLibInitialized) {
+      return;
+    }
+
+    log4js.configure(this.getLoggerLibConfig());
+
+    this.isLoggerLibInitialized = true;
+  }
+
+  protected getLoggerLibConfig() {
+    return {
       appenders: {
         everything: this.getAppenderFromConfig(this.logConfig.main),
         access: this.getAppenderFromConfig(this.logConfig.access),
@@ -19,19 +38,23 @@ export class LoggerFactory {
         db: { appenders: ['everything'], level: this.logConfig.main.level },
         access: { appenders: ['access'], level: this.logConfig.access.level },
       },
-    });
-  }
-
-  public create(category: string) {
-    return log4js.getLogger(category);
+    };
   }
 
   protected getAppenderFromConfig(categoryConfig: LogCategoryConfig) {
     return {
       file: {
+        type: 'file',
+        filename: categoryConfig.filename,
+        maxLogSize: 50 * 1024 * 1024,
+        backups: 10,
+        compress: true,
+      },
+      dateFile: {
         type: 'dateFile',
         filename: categoryConfig.filename,
         daysToKeep: 10,
+        compress: true,
       },
       console: {
         type: 'console',
