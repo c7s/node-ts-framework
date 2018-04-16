@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "compile": "./node_modules/.bin/tsc"
+    "build": "./node_modules/.bin/tsc"
   },
   "dependencies": {
     "@c7s/config": "git+ssh://git@github.com/c7s/config.git#dev",
@@ -22,7 +22,7 @@
     "@types/express": "4.11.1",
     "@types/node": "8.0.46",
     "tslint": "5.9.1",
-    "tslint-config-airbnb": "5.7.0",
-    "typescript": "2.7.2"
+    "tslint-config-airbnb": "5.8.0",
+    "typescript": "2.8.1"
   }
 }

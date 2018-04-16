@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const routing_controllers_1 = require("routing-controllers");
@@ -29,24 +21,22 @@ class WebApplication extends Application_1.Application {
         this.middlewares = middlewares;
         this.express = express();
     }
-    run() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.init();
-            this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
-            routing_controllers_1.useExpressServer(this.express, {
-                controllers: this.modules.map(module => module.controllers),
-                middlewares: this.middlewares,
-                defaultErrorHandler: false,
-            });
-            const { host, port } = this.config;
-            return new Promise((resolve, reject) => {
-                this.express.listen({ host, port }, (err) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    this.logger.info(`Server started at http://${host}:${port}`);
-                    resolve();
-                });
+    async run() {
+        await this.init();
+        this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
+        routing_controllers_1.useExpressServer(this.express, {
+            controllers: this.modules.map(module => module.controllers),
+            middlewares: this.middlewares,
+            defaultErrorHandler: false,
+        });
+        const { host, port } = this.config;
+        return new Promise((resolve, reject) => {
+            this.express.listen({ host, port }, (err) => {
+                if (err) {
+                    reject(err);
+                }
+                this.logger.info(`Server started at http://${host}:${port}`);
+                resolve();
             });
         });
     }

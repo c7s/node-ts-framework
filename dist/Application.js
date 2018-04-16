@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const di_1 = require("./di");
 class Application {
@@ -23,34 +15,28 @@ class Application {
         this.isInitialized = false;
         this.modules = modules;
     }
-    init() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.isInitialized) {
-                return;
-            }
-            for (const module of this.modules) {
-                yield module.initDiContainer(di_1.container, this.modules);
-            }
-            this.isInitialized = true;
-        });
+    async init() {
+        if (this.isInitialized) {
+            return;
+        }
+        for (const module of this.modules) {
+            await module.initDiContainer(di_1.container, this.modules);
+        }
+        this.isInitialized = true;
     }
-    end() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.isInitialized) {
-                return;
-            }
-            yield Promise.all(this.modules.map(module => module.end(di_1.container)));
-        });
+    async end() {
+        if (!this.isInitialized) {
+            return;
+        }
+        await Promise.all(this.modules.map(module => module.end(di_1.container)));
     }
-    run(callback) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.init();
-            const result = callback();
-            if (result instanceof Promise) {
-                yield result;
-            }
-            yield this.end();
-        });
+    async run(callback) {
+        await this.init();
+        const result = callback();
+        if (result instanceof Promise) {
+            await result;
+        }
+        await this.end();
     }
 }
 __decorate([
