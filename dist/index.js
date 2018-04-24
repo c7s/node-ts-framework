@@ -16,6 +16,8 @@ const DbConnectionFactory_1 = require("./components/DbConnectionFactory");
 const LoggerFactory_1 = require("./components/LoggerFactory");
 const AccessLogMiddlewareFactory_1 = require("./middlewares/AccessLogMiddlewareFactory");
 const ErrorHandlingMiddleware_1 = require("./middlewares/ErrorHandlingMiddleware");
+const rejectNanParam_1 = require("./rejectNanParam");
+exports.rejectNanParam = rejectNanParam_1.rejectNanParam;
 exports.components = {
     DbConnectionFactory: DbConnectionFactory_1.DbConnectionFactory,
     LoggerFactory: LoggerFactory_1.LoggerFactory,

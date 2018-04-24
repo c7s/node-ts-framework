@@ -8,6 +8,7 @@ import { DbConnectionFactory } from './components/DbConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
+import { rejectNanParam } from './rejectNanParam';
 
 export {
   Application,
@@ -16,6 +17,7 @@ export {
   Module,
   di,
   Environment,
+  rejectNanParam,
 };
 export const components = {
   DbConnectionFactory,
