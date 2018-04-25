@@ -1,7 +1,7 @@
 import lodashIsstring = require('lodash.isstring');
 import * as stripTags from 'striptags';
 
-export function objectStripTags(object: { [index: string]: any }, attributes?: string[]) {
+export function deepStripTags(object: { [index: string]: any }, attributes?: string[]) {
   for (const attribute in Object.keys(object)) {
     if (undefined !== attributes && -1 === attributes.indexOf(attribute)) {
       continue;

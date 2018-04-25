@@ -9,7 +9,7 @@ import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
 import { rejectNanParam } from './utils/rejectNanParam';
-import { objectStripTags } from './utils/objectStripTags';
+import { deepStripTags } from './utils/deepStripTags';
 export { Application, WebApplication, ClusteredWebApplication, Module, di, Environment, rejectNanParam };
 export declare const components: {
     DbConnectionFactory: typeof DbConnectionFactory;
@@ -21,5 +21,5 @@ export declare const middlewares: {
 };
 export declare const utils: {
     rejectNanParam: typeof rejectNanParam;
-    objectStripTags: typeof objectStripTags;
+    deepStripTags: typeof deepStripTags;
 };
