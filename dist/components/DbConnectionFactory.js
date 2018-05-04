@@ -8,14 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const inversify_1 = require("inversify");
 const typeorm_1 = require("typeorm");
@@ -26,10 +18,8 @@ const TypeormLogger_1 = require("../log/TypeormLogger");
  * TODO timezone
  */
 let DbConnectionFactory = class DbConnectionFactory {
-    create(modules) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return typeorm_1.createConnection(Object.assign({ logger: new TypeormLogger_1.TypeormLogger }, this.getConfig(modules)));
-        });
+    async create(modules) {
+        return typeorm_1.createConnection(Object.assign({ logger: new TypeormLogger_1.TypeormLogger }, this.getConfig(modules)));
     }
     getConfig(modules) {
         return Object.assign({}, this.dbConfig, { logging: this.dbConfig.logging, migrations: modules.map(module => module.migrations), entities: modules.map(module => module.models) });

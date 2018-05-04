@@ -16,6 +16,9 @@ const DbConnectionFactory_1 = require("./components/DbConnectionFactory");
 const LoggerFactory_1 = require("./components/LoggerFactory");
 const AccessLogMiddlewareFactory_1 = require("./middlewares/AccessLogMiddlewareFactory");
 const ErrorHandlingMiddleware_1 = require("./middlewares/ErrorHandlingMiddleware");
+const rejectNanParam_1 = require("./utils/rejectNanParam");
+exports.rejectNanParam = rejectNanParam_1.rejectNanParam;
+const deepStripTags_1 = require("./utils/deepStripTags");
 exports.components = {
     DbConnectionFactory: DbConnectionFactory_1.DbConnectionFactory,
     LoggerFactory: LoggerFactory_1.LoggerFactory,
@@ -23,5 +26,9 @@ exports.components = {
 exports.middlewares = {
     AccessLogMiddlewareFactory: AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory,
     ErrorHandlingMiddleware: ErrorHandlingMiddleware_1.ErrorHandlingMiddleware,
+};
+exports.utils = {
+    rejectNanParam: rejectNanParam_1.rejectNanParam,
+    deepStripTags: deepStripTags_1.deepStripTags,
 };
 //# sourceMappingURL=index.js.map

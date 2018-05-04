@@ -8,6 +8,8 @@ import { DbConnectionFactory } from './components/DbConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
+import { rejectNanParam } from './utils/rejectNanParam';
+import { deepStripTags } from './utils/deepStripTags';
 
 export {
   Application,
@@ -16,6 +18,7 @@ export {
   Module,
   di,
   Environment,
+  rejectNanParam,
 };
 export const components = {
   DbConnectionFactory,
@@ -24,4 +27,8 @@ export const components = {
 export const middlewares = {
   AccessLogMiddlewareFactory,
   ErrorHandlingMiddleware,
+};
+export const utils = {
+  rejectNanParam,
+  deepStripTags,
 };
