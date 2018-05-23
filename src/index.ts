@@ -4,6 +4,7 @@ import { WebApplication } from './WebApplication';
 import { ClusteredWebApplication } from './ClusteredWebApplication';
 import { Module } from './Module';
 import { Environment } from './Environment';
+import { DatabaseErrors } from './DatabaseErrors';
 import { DbConnectionFactory } from './components/DbConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
@@ -16,6 +17,7 @@ export {
   WebApplication,
   ClusteredWebApplication,
   Module,
+  DatabaseErrors,
   di,
   Environment,
   rejectNanParam,
