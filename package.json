@@ -10,6 +10,7 @@
   "dependencies": {
     "@c7s/config": "git+ssh://git@github.com/c7s/config.git#dev",
     "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#dev",
+    "class-transformer": "^0.1.9",
     "inversify": "4.13.0",
     "inversify-binding-decorators": "4.0.0",
     "inversify-inject-decorators": "3.1.0",
