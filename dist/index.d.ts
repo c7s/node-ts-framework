@@ -11,6 +11,8 @@ import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFac
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
 import { rejectNanParam } from './utils/rejectNanParam';
 import { deepStripTags } from './utils/deepStripTags';
+import { Trim } from './validation/Trim';
+import { StripTags } from './validation/StripTags';
 export { Application, WebApplication, ClusteredWebApplication, Module, DatabaseErrors, di, Environment, rejectNanParam };
 export declare const components: {
     DbConnectionFactory: typeof DbConnectionFactory;
@@ -23,4 +25,8 @@ export declare const middlewares: {
 export declare const utils: {
     rejectNanParam: typeof rejectNanParam;
     deepStripTags: typeof deepStripTags;
+};
+export declare const validation: {
+    Trim: typeof Trim;
+    StripTags: typeof StripTags;
 };
