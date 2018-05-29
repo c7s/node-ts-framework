@@ -21,6 +21,7 @@ const ErrorHandlingMiddleware_1 = require("./middlewares/ErrorHandlingMiddleware
 const rejectNanParam_1 = require("./utils/rejectNanParam");
 exports.rejectNanParam = rejectNanParam_1.rejectNanParam;
 const deepStripTags_1 = require("./utils/deepStripTags");
+const consoleErrorTimestamp_1 = require("./utils/consoleErrorTimestamp");
 const Trim_1 = require("./validation/Trim");
 const StripTags_1 = require("./validation/StripTags");
 exports.components = {
@@ -34,6 +35,7 @@ exports.middlewares = {
 exports.utils = {
     rejectNanParam: rejectNanParam_1.rejectNanParam,
     deepStripTags: deepStripTags_1.deepStripTags,
+    consoleErrorTimestamp: consoleErrorTimestamp_1.consoleErrorTimestamp,
 };
 exports.validation = {
     Trim: Trim_1.Trim,

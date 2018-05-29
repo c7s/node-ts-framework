@@ -11,6 +11,7 @@ import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFac
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
 import { rejectNanParam } from './utils/rejectNanParam';
 import { deepStripTags } from './utils/deepStripTags';
+import { consoleErrorTimestamp } from './utils/consoleErrorTimestamp';
 import { Trim } from './validation/Trim';
 import { StripTags } from './validation/StripTags';
 
@@ -35,6 +36,7 @@ export const middlewares = {
 export const utils = {
   rejectNanParam,
   deepStripTags,
+  consoleErrorTimestamp,
 };
 export const validation = {
   Trim,

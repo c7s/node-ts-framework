@@ -37,19 +37,27 @@ export class WebApplication extends Application {
     );
 
     const { host, port } = this.config;
-    return new Promise<void>((resolve, reject) => {
-      this.express
-        .listen(port, host, (err: any) => {
-          if (err) {
+    try {
+      await new Promise<void>((resolve, reject) => {
+        this.express
+          .listen(port, host, (err: any) => {
+            if (err) {
+              reject(err);
+            }
+            resolve();
+          }).on('error', (err) => {
             reject(err);
-          }
-          this.logger.info(`Server started at http://${host}:${port}`);
-          resolve();
-        }).on('error', (err) => {
-          reject(err);
-        });
+          });
 
-    });
+      });
+    } catch (e) {
+      this.logger.error(e);
+      process.exitCode = 1;
+      await this.end();
+      return;
+    }
+
+    this.logger.info(`Server started at http://${host}:${port}`);
   }
 
 }
