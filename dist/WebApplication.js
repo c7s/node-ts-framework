@@ -31,12 +31,15 @@ class WebApplication extends Application_1.Application {
         });
         const { host, port } = this.config;
         return new Promise((resolve, reject) => {
-            this.express.listen({ host, port }, (err) => {
+            this.express
+                .listen(port, host, (err) => {
                 if (err) {
                     reject(err);
                 }
                 this.logger.info(`Server started at http://${host}:${port}`);
                 resolve();
+            }).on('error', (err) => {
+                reject(err);
             });
         });
     }

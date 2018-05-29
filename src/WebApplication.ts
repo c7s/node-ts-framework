@@ -38,13 +38,16 @@ export class WebApplication extends Application {
 
     const { host, port } = this.config;
     return new Promise<void>((resolve, reject) => {
-      this.express.listen({ host, port }, (err: any) => {
-        if (err) {
+      this.express
+        .listen(port, host, (err: any) => {
+          if (err) {
+            reject(err);
+          }
+          this.logger.info(`Server started at http://${host}:${port}`);
+          resolve();
+        }).on('error', (err) => {
           reject(err);
-        }
-        this.logger.info(`Server started at http://${host}:${port}`);
-        resolve();
-      });
+        });
 
     });
   }
