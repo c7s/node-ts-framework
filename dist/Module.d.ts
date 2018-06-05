@@ -5,5 +5,5 @@ export declare abstract class Module {
     readonly models: string;
     abstract initDiContainer(container: Container, allApplicationModules: Module[]): Promise<void>;
     abstract end(container: Container): Promise<void>;
-    protected readonly abstract baseDirectory: string;
+    protected abstract readonly baseDirectory: string;
 }

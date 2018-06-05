@@ -1,4 +1,3 @@
-/// <reference types="express" />
 import * as express from 'express';
 import { ServerConfig } from '@c7s/config';
 import { Application } from './Application';
