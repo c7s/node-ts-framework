@@ -30,15 +30,26 @@ class WebApplication extends Application_1.Application {
             defaultErrorHandler: false,
         });
         const { host, port } = this.config;
-        return new Promise((resolve, reject) => {
-            this.express.listen({ host, port }, (err) => {
-                if (err) {
+        try {
+            await new Promise((resolve, reject) => {
+                this.express
+                    .listen(port, host, (err) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve();
+                }).on('error', (err) => {
                     reject(err);
-                }
-                this.logger.info(`Server started at http://${host}:${port}`);
-                resolve();
+                });
             });
-        });
+        }
+        catch (e) {
+            this.logger.error(e);
+            process.exitCode = 1;
+            await this.end();
+            return;
+        }
+        this.logger.info(`Server started at http://${host}:${port}`);
     }
 }
 __decorate([

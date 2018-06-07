@@ -1,4 +1,3 @@
-/// <reference types="express" />
 import { Logger } from 'log4js';
 import { Request, Response, NextFunction } from 'express';
 import { ValidationError } from 'class-validator';

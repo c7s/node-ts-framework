@@ -10,7 +10,6 @@
     "noUnusedParameters": true,
     "strict": true,
     "sourceMap": true,
-    "baseUrl": "./src",
     "declaration": true
   },
   "include": [
