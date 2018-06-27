@@ -15,6 +15,7 @@ exports.Environment = Environment_1.Environment;
 const DatabaseErrors_1 = require("./DatabaseErrors");
 exports.DatabaseErrors = DatabaseErrors_1.DatabaseErrors;
 const DbConnectionFactory_1 = require("./components/DbConnectionFactory");
+const RedisConnectionFactory_1 = require("./components/RedisConnectionFactory");
 const LoggerFactory_1 = require("./components/LoggerFactory");
 const AccessLogMiddlewareFactory_1 = require("./middlewares/AccessLogMiddlewareFactory");
 const ErrorHandlingMiddleware_1 = require("./middlewares/ErrorHandlingMiddleware");
@@ -24,6 +25,7 @@ const Trim_1 = require("./validation/Trim");
 const StripTags_1 = require("./validation/StripTags");
 exports.components = {
     DbConnectionFactory: DbConnectionFactory_1.DbConnectionFactory,
+    RedisConnectionFactory: RedisConnectionFactory_1.RedisConnectionFactory,
     LoggerFactory: LoggerFactory_1.LoggerFactory,
 };
 exports.middlewares = {

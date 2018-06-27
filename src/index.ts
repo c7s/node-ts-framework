@@ -6,6 +6,7 @@ import { Module } from './Module';
 import { Environment } from './Environment';
 import { DatabaseErrors } from './DatabaseErrors';
 import { DbConnectionFactory } from './components/DbConnectionFactory';
+import { RedisConnectionFactory } from './components/RedisConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
@@ -25,6 +26,7 @@ export {
 };
 export const components = {
   DbConnectionFactory,
+  RedisConnectionFactory,
   LoggerFactory,
 };
 export const middlewares = {
