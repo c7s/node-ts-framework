@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@types/express": "4.16.0",
-    "@types/ioredis": "3.2.10",
+    "@types/ioredis": "3.2.12",
     "@types/lodash.isstring": "4.0.3",
     "@types/node": "8.0.46",
     "tslint": "5.10.0",
