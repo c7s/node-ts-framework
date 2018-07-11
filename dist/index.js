@@ -20,7 +20,6 @@ const LoggerFactory_1 = require("./components/LoggerFactory");
 const AccessLogMiddlewareFactory_1 = require("./middlewares/AccessLogMiddlewareFactory");
 const ErrorHandlingMiddleware_1 = require("./middlewares/ErrorHandlingMiddleware");
 const rejectNanParam_1 = require("./controller/rejectNanParam");
-exports.rejectNanParam = rejectNanParam_1.rejectNanParam;
 const ByAttribute_1 = require("./pagination/ByAttribute");
 const ByOffset_1 = require("./pagination/ByOffset");
 const ReturnSpecification_1 = require("./controller/ReturnSpecification");
