@@ -10,7 +10,10 @@ import { RedisConnectionFactory } from './components/RedisConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
-import { rejectNanParam } from './utils/rejectNanParam';
+import { rejectNanParam } from './controller/rejectNanParam';
+import { ByAttribute } from './pagination/ByAttribute';
+import { ByOffset } from './pagination/ByOffset';
+import { ReturnSpecification } from './controller/ReturnSpecification';
 import { Trim } from './validation/Trim';
 import { StripTags } from './validation/StripTags';
 
@@ -33,8 +36,13 @@ export const middlewares = {
   AccessLogMiddlewareFactory,
   ErrorHandlingMiddleware,
 };
-export const utils = {
+export const controller = {
   rejectNanParam,
+  ReturnSpecification,
+};
+export const pagination = {
+  ByAttribute,
+  ByOffset,
 };
 export const validation = {
   Trim,

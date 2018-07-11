@@ -10,7 +10,10 @@ import { RedisConnectionFactory } from './components/RedisConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
-import { rejectNanParam } from './utils/rejectNanParam';
+import { rejectNanParam } from './controller/rejectNanParam';
+import { ByAttribute } from './pagination/ByAttribute';
+import { ByOffset } from './pagination/ByOffset';
+import { ReturnSpecification } from './controller/ReturnSpecification';
 import { Trim } from './validation/Trim';
 import { StripTags } from './validation/StripTags';
 export { Application, WebApplication, ClusteredWebApplication, Module, DatabaseErrors, di, Environment, rejectNanParam, };
@@ -23,8 +26,13 @@ export declare const middlewares: {
     AccessLogMiddlewareFactory: typeof AccessLogMiddlewareFactory;
     ErrorHandlingMiddleware: typeof ErrorHandlingMiddleware;
 };
-export declare const utils: {
+export declare const controller: {
     rejectNanParam: typeof rejectNanParam;
+    ReturnSpecification: typeof ReturnSpecification;
+};
+export declare const pagination: {
+    ByAttribute: typeof ByAttribute;
+    ByOffset: typeof ByOffset;
 };
 export declare const validation: {
     Trim: typeof Trim;

@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const log4js_1 = require("log4js");
 const routing_controllers_1 = require("routing-controllers");
 const http_errors_1 = require("@c7s/http-errors");
 const di_1 = require("../di");
@@ -82,7 +83,7 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
 };
 __decorate([
     di_1.inject(di_1.Type.AppLogger),
-    __metadata("design:type", Object)
+    __metadata("design:type", log4js_1.Logger)
 ], ErrorHandlingMiddleware.prototype, "logger", void 0);
 ErrorHandlingMiddleware = __decorate([
     routing_controllers_1.Middleware({ type: 'after' })

@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const log4js_1 = require("log4js");
 const di_1 = require("./di");
 class Application {
     constructor(modules) {
@@ -41,7 +42,7 @@ class Application {
 }
 __decorate([
     di_1.inject(di_1.Type.AppLogger),
-    __metadata("design:type", Object)
+    __metadata("design:type", log4js_1.Logger)
 ], Application.prototype, "logger", void 0);
 exports.Application = Application;
 //# sourceMappingURL=Application.js.map

@@ -19,8 +19,11 @@ const RedisConnectionFactory_1 = require("./components/RedisConnectionFactory");
 const LoggerFactory_1 = require("./components/LoggerFactory");
 const AccessLogMiddlewareFactory_1 = require("./middlewares/AccessLogMiddlewareFactory");
 const ErrorHandlingMiddleware_1 = require("./middlewares/ErrorHandlingMiddleware");
-const rejectNanParam_1 = require("./utils/rejectNanParam");
+const rejectNanParam_1 = require("./controller/rejectNanParam");
 exports.rejectNanParam = rejectNanParam_1.rejectNanParam;
+const ByAttribute_1 = require("./pagination/ByAttribute");
+const ByOffset_1 = require("./pagination/ByOffset");
+const ReturnSpecification_1 = require("./controller/ReturnSpecification");
 const Trim_1 = require("./validation/Trim");
 const StripTags_1 = require("./validation/StripTags");
 exports.components = {
@@ -32,8 +35,13 @@ exports.middlewares = {
     AccessLogMiddlewareFactory: AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory,
     ErrorHandlingMiddleware: ErrorHandlingMiddleware_1.ErrorHandlingMiddleware,
 };
-exports.utils = {
+exports.controller = {
     rejectNanParam: rejectNanParam_1.rejectNanParam,
+    ReturnSpecification: ReturnSpecification_1.ReturnSpecification,
+};
+exports.pagination = {
+    ByAttribute: ByAttribute_1.ByAttribute,
+    ByOffset: ByOffset_1.ByOffset,
 };
 exports.validation = {
     Trim: Trim_1.Trim,

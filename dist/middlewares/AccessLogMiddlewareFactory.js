@@ -22,7 +22,7 @@ class AccessLogMiddlewareFactory {
 }
 __decorate([
     di_1.inject(di_1.Type.AccessLogger),
-    __metadata("design:type", Object)
+    __metadata("design:type", log4js_1.Logger)
 ], AccessLogMiddlewareFactory.prototype, "logger", void 0);
 exports.AccessLogMiddlewareFactory = AccessLogMiddlewareFactory;
 //# sourceMappingURL=AccessLogMiddlewareFactory.js.map
