@@ -3,7 +3,7 @@ import * as url from 'url';
 import * as querystring from 'querystring';
 import * as util from 'util';
 
-export class ByAttribute<T> {
+export class PaginationByAttribute<T> {
 
   constructor(protected orderingAttributeName: keyof T) {}
 

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const url = require("url");
 const querystring = require("querystring");
-class ByOffset {
+class PaginationByOffset {
     async get(limit, offset, callback, request, response) {
         if (undefined === limit || 0 === limit) {
             return callback(undefined);
@@ -18,5 +18,5 @@ class ByOffset {
         return data;
     }
 }
-exports.ByOffset = ByOffset;
-//# sourceMappingURL=ByOffset.js.map
+exports.PaginationByOffset = PaginationByOffset;
+//# sourceMappingURL=PaginationByOffset.js.map

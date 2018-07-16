@@ -11,8 +11,8 @@ import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
 import { rejectNanParam } from './controller/rejectNanParam';
-import { ByAttribute } from './pagination/ByAttribute';
-import { ByOffset } from './pagination/ByOffset';
+import { PaginationByAttribute } from './pagination/PaginationByAttribute';
+import { PaginationByOffset } from './pagination/PaginationByOffset';
 import { ReturnSpecification } from './controller/ReturnSpecification';
 import { Trim } from './validation/Trim';
 import { StripTags } from './validation/StripTags';
@@ -25,27 +25,15 @@ export {
   DatabaseErrors,
   di,
   Environment,
-  rejectNanParam,
-  ReturnSpecification,
-};
-export const components = {
   DbConnectionFactory,
   RedisConnectionFactory,
   LoggerFactory,
-};
-export const middlewares = {
   AccessLogMiddlewareFactory,
   ErrorHandlingMiddleware,
-};
-export const controller = {
   rejectNanParam,
   ReturnSpecification,
-};
-export const pagination = {
-  ByAttribute,
-  ByOffset,
-};
-export const validation = {
+  PaginationByAttribute,
+  PaginationByOffset,
   Trim,
   StripTags,
 };

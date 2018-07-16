@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as url from 'url';
 import * as querystring from 'querystring';
 
-export class ByOffset<T> {
+export class PaginationByOffset<T> {
 
   public async get(
     limit: number | undefined,

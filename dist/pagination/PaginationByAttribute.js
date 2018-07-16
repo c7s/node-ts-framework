@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const url = require("url");
 const querystring = require("querystring");
 const util = require("util");
-class ByAttribute {
+class PaginationByAttribute {
     constructor(orderingAttributeName) {
         this.orderingAttributeName = orderingAttributeName;
     }
@@ -25,5 +25,5 @@ class ByAttribute {
         return data;
     }
 }
-exports.ByAttribute = ByAttribute;
-//# sourceMappingURL=ByAttribute.js.map
+exports.PaginationByAttribute = PaginationByAttribute;
+//# sourceMappingURL=PaginationByAttribute.js.map
