@@ -25,6 +25,8 @@ export {
   DatabaseErrors,
   di,
   Environment,
+  rejectNanParam,
+  ReturnSpecification,
 };
 export const components = {
   DbConnectionFactory,

@@ -16,7 +16,7 @@ import { ByOffset } from './pagination/ByOffset';
 import { ReturnSpecification } from './controller/ReturnSpecification';
 import { Trim } from './validation/Trim';
 import { StripTags } from './validation/StripTags';
-export { Application, WebApplication, ClusteredWebApplication, Module, DatabaseErrors, di, Environment, };
+export { Application, WebApplication, ClusteredWebApplication, Module, DatabaseErrors, di, Environment, rejectNanParam, ReturnSpecification, };
 export declare const components: {
     DbConnectionFactory: typeof DbConnectionFactory;
     RedisConnectionFactory: typeof RedisConnectionFactory;
