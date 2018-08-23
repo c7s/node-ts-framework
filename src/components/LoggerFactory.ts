@@ -6,7 +6,7 @@ import { inject, Type } from '../di';
 @injectable()
 export class LoggerFactory {
   @inject(Type.LogConfig)
-  protected logConfig!: LogConfig;
+  protected readonly logConfig!: LogConfig;
 
   protected isLoggerLibInitialized = false;
 
@@ -42,7 +42,7 @@ export class LoggerFactory {
   }
 
   protected getAppenderFromConfig(categoryConfig: LogCategoryConfig) {
-    return {
+    const appenderConfigMap = {
       file: {
         type: 'file',
         filename: categoryConfig.filename,
@@ -59,7 +59,11 @@ export class LoggerFactory {
       console: {
         type: 'console',
       },
-    }[categoryConfig.type];
+    };
+    if (undefined === appenderConfigMap[categoryConfig.type]) {
+      throw new Error(`Appender config of type ${categoryConfig.type} is not defined`);
+    }
+    return appenderConfigMap[categoryConfig.type];
   }
 
 }

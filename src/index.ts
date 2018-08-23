@@ -6,10 +6,14 @@ import { Module } from './Module';
 import { Environment } from './Environment';
 import { DatabaseErrors } from './DatabaseErrors';
 import { DbConnectionFactory } from './components/DbConnectionFactory';
+import { RedisConnectionFactory } from './components/RedisConnectionFactory';
 import { LoggerFactory } from './components/LoggerFactory';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { ErrorHandlingMiddleware } from './middlewares/ErrorHandlingMiddleware';
-import { rejectNanParam } from './utils/rejectNanParam';
+import { rejectNanParam } from './controller/rejectNanParam';
+import { PaginationByAttribute } from './pagination/PaginationByAttribute';
+import { PaginationByOffset } from './pagination/PaginationByOffset';
+import { ReturnSpecification } from './controller/ReturnSpecification';
 import { Trim } from './validation/Trim';
 import { StripTags } from './validation/StripTags';
 
@@ -21,20 +25,15 @@ export {
   DatabaseErrors,
   di,
   Environment,
-  rejectNanParam,
-};
-export const components = {
   DbConnectionFactory,
+  RedisConnectionFactory,
   LoggerFactory,
-};
-export const middlewares = {
   AccessLogMiddlewareFactory,
   ErrorHandlingMiddleware,
-};
-export const utils = {
   rejectNanParam,
-};
-export const validation = {
+  ReturnSpecification,
+  PaginationByAttribute,
+  PaginationByOffset,
   Trim,
   StripTags,
 };

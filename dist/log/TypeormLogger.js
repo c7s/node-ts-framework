@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const log4js_1 = require("log4js");
 const di_1 = require("../di");
 /**
  * Message formatting code copy-pasted from typeorm/src/logger/FileLogger
@@ -42,7 +43,7 @@ class TypeormLogger {
 }
 __decorate([
     di_1.inject(di_1.Type.DbLogger),
-    __metadata("design:type", Object)
+    __metadata("design:type", log4js_1.Logger)
 ], TypeormLogger.prototype, "logger", void 0);
 exports.TypeormLogger = TypeormLogger;
 //# sourceMappingURL=TypeormLogger.js.map

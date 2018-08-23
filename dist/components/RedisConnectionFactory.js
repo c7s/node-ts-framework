@@ -9,20 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const log4js_1 = require("log4js");
+const inversify_1 = require("inversify");
+const IORedis = require("ioredis");
+const config_1 = require("@c7s/config");
 const di_1 = require("../di");
-class AccessLogMiddlewareFactory {
+let RedisConnectionFactory = class RedisConnectionFactory {
     create() {
-        return log4js_1.connectLogger(this.logger, {
-            level: 'auto',
-            /* tslint:disable:max-line-length */
-            format: ':remote-addr - - ":method :url HTTP/:http-version" :status :content-length ":referrer" ":user-agent" :response-time',
-        });
+        return new IORedis(this.config);
     }
-}
+};
 __decorate([
-    di_1.inject(di_1.Type.AccessLogger),
-    __metadata("design:type", log4js_1.Logger)
-], AccessLogMiddlewareFactory.prototype, "logger", void 0);
-exports.AccessLogMiddlewareFactory = AccessLogMiddlewareFactory;
-//# sourceMappingURL=AccessLogMiddlewareFactory.js.map
+    di_1.inject(di_1.Type.RedisConfig),
+    __metadata("design:type", config_1.RedisConfig)
+], RedisConnectionFactory.prototype, "config", void 0);
+RedisConnectionFactory = __decorate([
+    inversify_1.injectable()
+], RedisConnectionFactory);
+exports.RedisConnectionFactory = RedisConnectionFactory;
+//# sourceMappingURL=RedisConnectionFactory.js.map

@@ -9,12 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const log4js_1 = require("log4js");
 const routing_controllers_1 = require("routing-controllers");
 const http_errors_1 = require("@c7s/http-errors");
 const di_1 = require("../di");
-const BAD_REQUEST_CODE = 400;
-const NOT_FOUND_CODE = 404;
-const INTERNAL_SERVER_CODE = 500;
+var HttpCode;
+(function (HttpCode) {
+    HttpCode[HttpCode["BadRequest"] = 400] = "BadRequest";
+    HttpCode[HttpCode["NotFound"] = 404] = "NotFound";
+    HttpCode[HttpCode["InternalServer"] = 500] = "InternalServer";
+    HttpCode[HttpCode["EntityTooLarge"] = 413] = "EntityTooLarge";
+})(HttpCode || (HttpCode = {}));
 let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
     error(error, {}, response, next) {
         const extractedError = this.extractError(error);
@@ -43,7 +48,7 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
     }
     logError(error) {
         const code = this.identifyHttpCode(error);
-        (code === INTERNAL_SERVER_CODE)
+        (code === HttpCode.InternalServer)
             ? this.logger.fatal(error)
             : this.logger.error(error);
     }
@@ -51,28 +56,40 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
         let result = null;
         const code = this.identifyHttpCode(error);
         switch (code) {
-            case BAD_REQUEST_CODE:
+            case HttpCode.BadRequest:
                 const errors = error.errors;
                 result = errors
                     ? this.createValidationError(errors, error.paramName)
                     : new http_errors_1.BadRequestError(error.message);
                 break;
-            case NOT_FOUND_CODE:
+            case HttpCode.NotFound:
                 result = new http_errors_1.NotFoundError(error.message);
                 break;
-            case INTERNAL_SERVER_CODE:
+            case HttpCode.InternalServer:
                 result = new http_errors_1.InternalServerError(error.message);
+                break;
+            case HttpCode.EntityTooLarge:
+                const bodyParserError = error;
+                if (undefined !== bodyParserError.limit && undefined !== bodyParserError.length) {
+                    result = new http_errors_1.EntityTooLargeError(`${error.message} (request ${bodyParserError.length}, limit ${bodyParserError.limit})`);
+                }
+                else {
+                    result = new http_errors_1.EntityTooLargeError(error.message);
+                }
                 break;
         }
         return result;
     }
     identifyHttpCode(error) {
-        let code = INTERNAL_SERVER_CODE;
+        let code = HttpCode.InternalServer;
         if (error instanceof routing_controllers_1.HttpError) {
             code = error.httpCode;
         }
         else if (error instanceof http_errors_1.HttpError) {
             code = error.code;
+        }
+        else if (undefined !== error.status) {
+            code = error.status;
         }
         return code;
     }
@@ -82,7 +99,7 @@ let ErrorHandlingMiddleware = class ErrorHandlingMiddleware {
 };
 __decorate([
     di_1.inject(di_1.Type.AppLogger),
-    __metadata("design:type", Object)
+    __metadata("design:type", log4js_1.Logger)
 ], ErrorHandlingMiddleware.prototype, "logger", void 0);
 ErrorHandlingMiddleware = __decorate([
     routing_controllers_1.Middleware({ type: 'after' })

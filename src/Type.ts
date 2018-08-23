@@ -5,6 +5,9 @@ export const Type = {
   DbConfig: Symbol('DbConfig'),
   DbConnection: Symbol('DbConnection'),
 
+  RedisConfig: Symbol('RedisConfig'),
+  RedisConnection: Symbol('RedisConnection'),
+
   ServicesConfig: Symbol('ServicesConfig'),
   ServiceDiscovery: Symbol('ServiceDiscovery'),
 
