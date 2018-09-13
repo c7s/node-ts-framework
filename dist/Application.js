@@ -33,11 +33,15 @@ class Application {
     }
     async run(callback) {
         await this.init();
-        const result = callback();
-        if (result instanceof Promise) {
-            await result;
+        try {
+            const result = callback();
+            if (result instanceof Promise) {
+                await result;
+            }
         }
-        await this.end();
+        finally {
+            await this.end();
+        }
     }
 }
 __decorate([
