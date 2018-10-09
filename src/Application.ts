@@ -38,11 +38,14 @@ export class Application {
 
   public async run(callback: Function) {
     await this.init();
-    const result = callback();
-    if (result instanceof Promise) {
-      await result;
+    try {
+      const result = callback();
+      if (result instanceof Promise) {
+        await result;
+      }
+    } finally {
+      await this.end();
     }
-    await this.end();
   }
 
 }
