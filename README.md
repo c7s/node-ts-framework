@@ -21,6 +21,7 @@ Bootstrap:
 import { Container } from 'inversify';
 import { Connection, getRepository, Repository } from 'typeorm';
 import {
+  Module,
   WebApplication,
   ClusteredWebApplication,
   Environment,
