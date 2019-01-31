@@ -20,6 +20,7 @@ export class PaginationByOffset<T> {
 
     if (isHaveNextPage) {
       const nextPageUrl = url.parse(request.url, true);
+      // tslint:disable-next-line:prefer-template
       nextPageUrl.search = '?' + querystring.stringify({
         ...nextPageUrl.query,
         offset: (offset || 0) + limit,

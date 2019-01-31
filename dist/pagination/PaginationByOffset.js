@@ -12,6 +12,7 @@ class PaginationByOffset {
         data = data.slice(0, limit);
         if (isHaveNextPage) {
             const nextPageUrl = url.parse(request.url, true);
+            // tslint:disable-next-line:prefer-template
             nextPageUrl.search = '?' + querystring.stringify(Object.assign({}, nextPageUrl.query, { offset: (offset || 0) + limit }));
             response.links({ next: url.format(nextPageUrl) });
         }

@@ -26,6 +26,7 @@ export class PaginationByAttribute<T> {
       const orderingParamName = `after${(this.orderingAttributeName as string)[0].toUpperCase()}${(this.orderingAttributeName as string).slice(1)}`;
 
       const nextPageUrl = url.parse(request.url, true);
+      // tslint:disable-next-line:prefer-template
       nextPageUrl.search = '?' + querystring.stringify({
         ...nextPageUrl.query,
         [orderingParamName]: util.format(nextOrderingAttibuteValue),
