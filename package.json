@@ -9,8 +9,8 @@
     "tslint": "./node_modules/.bin/tslint --project ."
   },
   "dependencies": {
-    "@c7s/config": "git+ssh://git@github.com/c7s/config.git#dev",
-    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#dev",
+    "@c7s/config": "git+ssh://git@github.com/c7s/config.git#release-20190123-311313838",
+    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#release-20190123-311313838",
     "class-transformer": "^0.1.9",
     "inversify": "5.0.1",
     "inversify-binding-decorators": "4.0.0",

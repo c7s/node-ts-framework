@@ -1,2 +1,4 @@
 import { TransformOptions } from 'class-transformer';
-export declare function Trim(options?: TransformOptions): (target: any, key: string) => void;
+export declare function Trim(options?: TransformOptions, trimOptions?: {
+    each?: boolean;
+}): (target: any, key: string) => void;
