@@ -19,6 +19,7 @@ class PaginationByAttribute {
             /* tslint:disable-next-line:max-line-length */
             const orderingParamName = `after${this.orderingAttributeName[0].toUpperCase()}${this.orderingAttributeName.slice(1)}`;
             const nextPageUrl = url.parse(request.url, true);
+            // tslint:disable-next-line:prefer-template
             nextPageUrl.search = '?' + querystring.stringify(Object.assign({}, nextPageUrl.query, { [orderingParamName]: util.format(nextOrderingAttibuteValue) }));
             response.links({ next: url.format(nextPageUrl) });
         }

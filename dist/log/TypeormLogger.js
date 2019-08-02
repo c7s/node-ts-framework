@@ -17,19 +17,19 @@ const di_1 = require("../di");
 class TypeormLogger {
     logQuery(query, parameters) {
         const sql = query
-            + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
-        this.logger.debug('[QUERY]: ' + sql);
+            + (parameters && parameters.length ? ` -- PARAMETERS: ${JSON.stringify(parameters)}` : '');
+        this.logger.debug(`[QUERY]: ${sql}`);
     }
     logQueryError(error, query, parameters) {
         const sql = query
-            + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
+            + (parameters && parameters.length ? ` -- PARAMETERS: ${JSON.stringify(parameters)}` : '');
         this.logger.error(`[FAILED QUERY]: ${sql}`);
         this.logger.error(`[QUERY ERROR]: ${error}`);
     }
     logQuerySlow(time, query, parameters) {
         const sql = query
-            + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
-        this.logger.warn(`[SLOW QUERY: ${time} ms]: ` + sql);
+            + (parameters && parameters.length ? ` -- PARAMETERS: ${JSON.stringify(parameters)}` : '');
+        this.logger.warn(`[SLOW QUERY: ${time} ms]: ${sql}`);
     }
     logSchemaBuild(message) {
         this.logger.debug(message);

@@ -11,21 +11,21 @@ export class TypeormLogger implements Logger {
 
   public logQuery(query: string, parameters: any[] | undefined) {
     const sql = query
-      + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
-    this.logger.debug('[QUERY]: ' + sql);
+      + (parameters && parameters.length ? ` -- PARAMETERS: ${JSON.stringify(parameters)}` : '');
+    this.logger.debug(`[QUERY]: ${sql}`);
   }
 
   public logQueryError(error: string, query: string, parameters: any[] | undefined) {
     const sql = query
-      + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
+      + (parameters && parameters.length ? ` -- PARAMETERS: ${JSON.stringify(parameters)}` : '');
     this.logger.error(`[FAILED QUERY]: ${sql}`);
     this.logger.error(`[QUERY ERROR]: ${error}`);
   }
 
   public logQuerySlow(time: number, query: string, parameters?: any[] | undefined) {
     const sql = query
-      + (parameters && parameters.length ? ' -- PARAMETERS: ' + JSON.stringify(parameters) : '');
-    this.logger.warn(`[SLOW QUERY: ${time} ms]: ` + sql);
+      + (parameters && parameters.length ? ` -- PARAMETERS: ${JSON.stringify(parameters)}` : '');
+    this.logger.warn(`[SLOW QUERY: ${time} ms]: ${sql}`);
   }
 
   public logSchemaBuild(message: string) {
