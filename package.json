@@ -9,8 +9,8 @@
     "tslint": "tslint --project ."
   },
   "dependencies": {
-    "@c7s/config": "c7s/config#release-20190101-403703794",
-    "@c7s/http-errors": "c7s/http-errors#release-20190101-403703794",
+    "@c7s/config": "c7s/config#dev",
+    "@c7s/http-errors": "c7s/http-errors#dev",
     "class-transformer": "^0.1.9",
     "inversify": "5.0.1",
     "inversify-binding-decorators": "4.0.0",
