@@ -5,12 +5,12 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "./node_modules/.bin/tsc",
-    "tslint": "./node_modules/.bin/tslint --project ."
+    "build": "tsc",
+    "tslint": "tslint --project ."
   },
   "dependencies": {
-    "@c7s/config": "git+ssh://git@github.com/c7s/config.git#release-20190123-311313838",
-    "@c7s/http-errors": "git+ssh://git@github.com/c7s/http-errors.git#release-20190123-311313838",
+    "@c7s/config": "c7s/config#release-20190101-403703794",
+    "@c7s/http-errors": "c7s/http-errors#release-20190101-403703794",
     "class-transformer": "^0.1.9",
     "inversify": "5.0.1",
     "inversify-binding-decorators": "4.0.0",
