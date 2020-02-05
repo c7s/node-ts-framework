@@ -22,7 +22,7 @@ let DbConnectionFactory = class DbConnectionFactory {
         return typeorm_1.createConnection(Object.assign({ logger: new TypeormLogger_1.TypeormLogger }, this.getConfig(modules)));
     }
     getConfig(modules) {
-        return Object.assign({}, this.dbConfig, { logging: this.dbConfig.logging, migrations: modules.map(module => module.migrations), entities: modules.map(module => module.models) });
+        return Object.assign(Object.assign({}, this.dbConfig), { logging: this.dbConfig.logging, migrations: modules.map(module => module.migrations), entities: modules.map(module => module.models) });
     }
 };
 __decorate([
