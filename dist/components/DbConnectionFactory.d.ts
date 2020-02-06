@@ -1,14 +1,14 @@
 import { Connection } from 'typeorm';
 import { DbConfig } from '@c7s/config';
+import { LoggerOptions } from 'typeorm/logger/LoggerOptions';
 import { Module } from '../Module';
 /**
  * TODO timezone
  */
 export declare class DbConnectionFactory {
     protected dbConfig: DbConfig;
-    create(modules: Module[]): Promise<Connection>;
+    create(modules: Module[], logging?: LoggerOptions): Promise<Connection>;
     getConfig(modules: Module[]): {
-        logging: any;
         migrations: string[];
         entities: string[];
         type: "postgres";
