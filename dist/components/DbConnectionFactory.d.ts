@@ -7,8 +7,9 @@ import { Module } from '../Module';
  */
 export declare class DbConnectionFactory {
     protected dbConfig: DbConfig;
-    create(modules: Module[], logging?: LoggerOptions): Promise<Connection>;
-    getConfig(modules: Module[]): {
+    create(modules: Module[]): Promise<Connection>;
+    getConfig(modules: Module[], logging?: LoggerOptions): {
+        logging: boolean | "all" | ("error" | "query" | "log" | "info" | "warn" | "schema" | "migration")[] | undefined;
         migrations: string[];
         entities: string[];
         type: "postgres";

@@ -15,17 +15,17 @@ export class DbConnectionFactory {
   @inject(Type.DbConfig)
   protected dbConfig!: DbConfig;
 
-  public async create(modules: Module[], logging?: LoggerOptions): Promise<Connection> {
+  public async create(modules: Module[]): Promise<Connection> {
     return createConnection({
-      logging,
       logger: new TypeormLogger,
       ...this.getConfig(modules),
     });
   }
 
-  public getConfig(modules: Module[]) {
+  public getConfig(modules: Module[], logging?: LoggerOptions) {
     return {
       ...this.dbConfig,
+      logging,
       migrations: modules.map(module => module.migrations),
       entities: modules.map(module => module.models),
     };

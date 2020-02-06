@@ -18,11 +18,11 @@ const TypeormLogger_1 = require("../log/TypeormLogger");
  * TODO timezone
  */
 let DbConnectionFactory = class DbConnectionFactory {
-    async create(modules, logging) {
-        return typeorm_1.createConnection(Object.assign({ logging, logger: new TypeormLogger_1.TypeormLogger }, this.getConfig(modules)));
+    async create(modules) {
+        return typeorm_1.createConnection(Object.assign({ logger: new TypeormLogger_1.TypeormLogger }, this.getConfig(modules)));
     }
-    getConfig(modules) {
-        return Object.assign(Object.assign({}, this.dbConfig), { migrations: modules.map(module => module.migrations), entities: modules.map(module => module.models) });
+    getConfig(modules, logging) {
+        return Object.assign(Object.assign({}, this.dbConfig), { logging, migrations: modules.map(module => module.migrations), entities: modules.map(module => module.models) });
     }
 };
 __decorate([
