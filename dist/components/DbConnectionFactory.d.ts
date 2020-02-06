@@ -1,6 +1,5 @@
 import { Connection } from 'typeorm';
 import { DbConfig } from '@c7s/config';
-import { LoggerOptions } from 'typeorm/logger/LoggerOptions';
 import { Module } from '../Module';
 /**
  * TODO timezone
@@ -8,8 +7,7 @@ import { Module } from '../Module';
 export declare class DbConnectionFactory {
     protected dbConfig: DbConfig;
     create(modules: Module[]): Promise<Connection>;
-    getConfig(modules: Module[], logging?: LoggerOptions): {
-        logging: boolean | "all" | ("error" | "query" | "log" | "info" | "warn" | "schema" | "migration")[] | undefined;
+    getConfig(modules: Module[]): {
         migrations: string[];
         entities: string[];
         type: "postgres";

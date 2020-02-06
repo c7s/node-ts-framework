@@ -1,7 +1,6 @@
 import { injectable } from 'inversify';
 import { createConnection, Connection } from 'typeorm';
 import { DbConfig } from '@c7s/config';
-import { LoggerOptions } from 'typeorm/logger/LoggerOptions';
 
 import { inject, Type } from '../di';
 import { Module } from '../Module';
@@ -22,10 +21,9 @@ export class DbConnectionFactory {
     });
   }
 
-  public getConfig(modules: Module[], logging?: LoggerOptions) {
+  public getConfig(modules: Module[]) {
     return {
       ...this.dbConfig,
-      logging,
       migrations: modules.map(module => module.migrations),
       entities: modules.map(module => module.models),
     };
