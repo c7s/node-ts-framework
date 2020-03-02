@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { useExpressServer } from 'routing-controllers';
 import { ServerConfig } from '@c7s/config';
+import { Server } from 'http';
+
 import { Application } from './Application';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { Module } from './Module';
@@ -39,23 +41,24 @@ export class WebApplication extends Application {
 
       const { host, port } = this.config;
 
-      await new Promise<void>((resolve, reject) => {
-        this.express
+      const server = await new Promise<Server>((resolve, reject) => {
+        const server = this.express
           .listen(port, host, (err: any) => {
             if (err) {
               reject(err);
             }
-            resolve();
+            resolve(server);
           }).on('error', (err) => {
             reject(err);
           });
-
       });
       this.logger.info(`Server started at http://${host}:${port}`);
 
       process.on('SIGTERM', () => {
         this.logger.info('Got SIGTERM, stopping application');
-        this.end();
+        server.close(() => {
+          this.end();
+        });
       });
     } catch (e) {
       this.logger.error(e);

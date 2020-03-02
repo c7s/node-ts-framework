@@ -31,13 +31,13 @@ class WebApplication extends Application_1.Application {
                 defaultErrorHandler: false,
             });
             const { host, port } = this.config;
-            await new Promise((resolve, reject) => {
-                this.express
+            const server = await new Promise((resolve, reject) => {
+                const server = this.express
                     .listen(port, host, (err) => {
                     if (err) {
                         reject(err);
                     }
-                    resolve();
+                    resolve(server);
                 }).on('error', (err) => {
                     reject(err);
                 });
@@ -45,7 +45,9 @@ class WebApplication extends Application_1.Application {
             this.logger.info(`Server started at http://${host}:${port}`);
             process.on('SIGTERM', () => {
                 this.logger.info('Got SIGTERM, stopping application');
-                this.end();
+                server.close(() => {
+                    this.end();
+                });
             });
         }
         catch (e) {
