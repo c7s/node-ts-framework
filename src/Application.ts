@@ -37,12 +37,15 @@ export class Application {
   }
 
   public async run(callback: Function) {
-    await this.init();
     try {
+      await this.init();
       const result = callback();
       if (result instanceof Promise) {
         await result;
       }
+    } catch (e) {
+      this.logger.error(e);
+      process.exitCode = 1;
     } finally {
       await this.end();
     }

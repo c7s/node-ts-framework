@@ -22,15 +22,15 @@ class WebApplication extends Application_1.Application {
         this.express = express();
     }
     async run() {
-        await this.init();
-        this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
-        routing_controllers_1.useExpressServer(this.express, {
-            controllers: this.modules.map(module => module.controllers),
-            middlewares: this.middlewares,
-            defaultErrorHandler: false,
-        });
-        const { host, port } = this.config;
         try {
+            await this.init();
+            this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
+            routing_controllers_1.useExpressServer(this.express, {
+                controllers: this.modules.map(module => module.controllers),
+                middlewares: this.middlewares,
+                defaultErrorHandler: false,
+            });
+            const { host, port } = this.config;
             await new Promise((resolve, reject) => {
                 this.express
                     .listen(port, host, (err) => {
@@ -42,14 +42,15 @@ class WebApplication extends Application_1.Application {
                     reject(err);
                 });
             });
+            this.logger.info(`Server started at http://${host}:${port}`);
         }
         catch (e) {
             this.logger.error(e);
             process.exitCode = 1;
-            await this.end();
-            return;
         }
-        this.logger.info(`Server started at http://${host}:${port}`);
+        finally {
+            await this.end();
+        }
     }
 }
 __decorate([

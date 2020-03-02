@@ -23,21 +23,22 @@ export class WebApplication extends Application {
   }
 
   public async run(): Promise<void> {
-    await this.init();
-
-    this.express.use((new AccessLogMiddlewareFactory).create());
-
-    useExpressServer(
-      this.express,
-      {
-        controllers: this.modules.map(module => module.controllers),
-        middlewares: this.middlewares,
-        defaultErrorHandler: false,
-      },
-    );
-
-    const { host, port } = this.config;
     try {
+      await this.init();
+
+      this.express.use((new AccessLogMiddlewareFactory).create());
+
+      useExpressServer(
+        this.express,
+        {
+          controllers: this.modules.map(module => module.controllers),
+          middlewares: this.middlewares,
+          defaultErrorHandler: false,
+        },
+      );
+
+      const { host, port } = this.config;
+
       await new Promise<void>((resolve, reject) => {
         this.express
           .listen(port, host, (err: any) => {
@@ -50,14 +51,13 @@ export class WebApplication extends Application {
           });
 
       });
+      this.logger.info(`Server started at http://${host}:${port}`);
     } catch (e) {
       this.logger.error(e);
       process.exitCode = 1;
+    } finally {
       await this.end();
-      return;
     }
-
-    this.logger.info(`Server started at http://${host}:${port}`);
   }
 
 }

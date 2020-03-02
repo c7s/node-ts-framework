@@ -32,12 +32,16 @@ class Application {
         await Promise.all(this.modules.map(module => module.end(di_1.container)));
     }
     async run(callback) {
-        await this.init();
         try {
+            await this.init();
             const result = callback();
             if (result instanceof Promise) {
                 await result;
             }
+        }
+        catch (e) {
+            this.logger.error(e);
+            process.exitCode = 1;
         }
         finally {
             await this.end();
