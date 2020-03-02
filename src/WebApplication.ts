@@ -52,6 +52,11 @@ export class WebApplication extends Application {
 
       });
       this.logger.info(`Server started at http://${host}:${port}`);
+
+      process.on('SIGTERM', () => {
+        this.logger.info('Got SIGTERM, stopping application');
+        this.end();
+      });
     } catch (e) {
       this.logger.error(e);
       await this.end();
