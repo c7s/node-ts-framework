@@ -54,9 +54,8 @@ export class WebApplication extends Application {
       this.logger.info(`Server started at http://${host}:${port}`);
     } catch (e) {
       this.logger.error(e);
-      process.exitCode = 1;
-    } finally {
       await this.end();
+      process.exit(1);
     }
   }
 

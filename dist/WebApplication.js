@@ -46,10 +46,8 @@ class WebApplication extends Application_1.Application {
         }
         catch (e) {
             this.logger.error(e);
-            process.exitCode = 1;
-        }
-        finally {
             await this.end();
+            process.exit(1);
         }
     }
 }

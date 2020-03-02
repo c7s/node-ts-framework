@@ -38,13 +38,12 @@ class Application {
             if (result instanceof Promise) {
                 await result;
             }
+            await this.end();
         }
         catch (e) {
             this.logger.error(e);
-            process.exitCode = 1;
-        }
-        finally {
             await this.end();
+            process.exit(1);
         }
     }
 }
