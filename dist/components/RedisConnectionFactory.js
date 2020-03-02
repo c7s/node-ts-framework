@@ -25,6 +25,7 @@ let RedisConnectionFactory = class RedisConnectionFactory {
                 reject(err);
             });
         });
+        return connection;
     }
 };
 __decorate([

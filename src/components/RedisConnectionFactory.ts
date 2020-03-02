@@ -19,6 +19,7 @@ export class RedisConnectionFactory {
         reject(err);
       });
     });
+    return connection;
   }
 
 }
