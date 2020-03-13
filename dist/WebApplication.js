@@ -22,34 +22,39 @@ class WebApplication extends Application_1.Application {
         this.express = express();
     }
     async run() {
-        await this.init();
-        this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
-        routing_controllers_1.useExpressServer(this.express, {
-            controllers: this.modules.map(module => module.controllers),
-            middlewares: this.middlewares,
-            defaultErrorHandler: false,
-        });
-        const { host, port } = this.config;
         try {
-            await new Promise((resolve, reject) => {
-                this.express
+            await this.init();
+            this.express.use((new AccessLogMiddlewareFactory_1.AccessLogMiddlewareFactory).create());
+            routing_controllers_1.useExpressServer(this.express, {
+                controllers: this.modules.map(module => module.controllers),
+                middlewares: this.middlewares,
+                defaultErrorHandler: false,
+            });
+            const { host, port } = this.config;
+            const server = await new Promise((resolve, reject) => {
+                const server = this.express
                     .listen(port, host, (err) => {
                     if (err) {
                         reject(err);
                     }
-                    resolve();
+                    resolve(server);
                 }).on('error', (err) => {
                     reject(err);
+                });
+            });
+            this.logger.info(`Server started at http://${host}:${port}`);
+            process.on('SIGTERM', () => {
+                this.logger.info('Got SIGTERM, stopping application');
+                server.close(() => {
+                    this.end();
                 });
             });
         }
         catch (e) {
             this.logger.error(e);
-            process.exitCode = 1;
             await this.end();
-            return;
+            process.exit(1);
         }
-        this.logger.info(`Server started at http://${host}:${port}`);
     }
 }
 __decorate([

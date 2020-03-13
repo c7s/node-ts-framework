@@ -8,8 +8,18 @@ export class RedisConnectionFactory {
   @inject(Type.RedisConfig)
   protected config!: RedisConfig;
 
-  public create() {
-    return new IORedis(this.config);
+  public async create() {
+    const connection = new IORedis(this.config);
+    await new Promise((resolve, reject) => {
+      connection.on('connect', () => {
+        resolve();
+      });
+      connection.on('error', (err) => {
+        connection.quit();
+        reject(err);
+      });
+    });
+    return connection;
   }
 
 }

@@ -8,7 +8,6 @@ export declare class DbConnectionFactory {
     protected dbConfig: DbConfig;
     create(modules: Module[]): Promise<Connection>;
     getConfig(modules: Module[]): {
-        logging: any;
         migrations: string[];
         entities: string[];
         type: "postgres";

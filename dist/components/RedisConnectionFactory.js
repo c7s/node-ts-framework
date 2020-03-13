@@ -14,8 +14,18 @@ const IORedis = require("ioredis");
 const config_1 = require("@c7s/config");
 const di_1 = require("../di");
 let RedisConnectionFactory = class RedisConnectionFactory {
-    create() {
-        return new IORedis(this.config);
+    async create() {
+        const connection = new IORedis(this.config);
+        await new Promise((resolve, reject) => {
+            connection.on('connect', () => {
+                resolve();
+            });
+            connection.on('error', (err) => {
+                connection.quit();
+                reject(err);
+            });
+        });
+        return connection;
     }
 };
 __decorate([

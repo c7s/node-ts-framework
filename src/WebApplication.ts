@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { useExpressServer } from 'routing-controllers';
 import { ServerConfig } from '@c7s/config';
+import { Server } from 'http';
+
 import { Application } from './Application';
 import { AccessLogMiddlewareFactory } from './middlewares/AccessLogMiddlewareFactory';
 import { Module } from './Module';
@@ -23,41 +25,46 @@ export class WebApplication extends Application {
   }
 
   public async run(): Promise<void> {
-    await this.init();
-
-    this.express.use((new AccessLogMiddlewareFactory).create());
-
-    useExpressServer(
-      this.express,
-      {
-        controllers: this.modules.map(module => module.controllers),
-        middlewares: this.middlewares,
-        defaultErrorHandler: false,
-      },
-    );
-
-    const { host, port } = this.config;
     try {
-      await new Promise<void>((resolve, reject) => {
-        this.express
+      await this.init();
+
+      this.express.use((new AccessLogMiddlewareFactory).create());
+
+      useExpressServer(
+        this.express,
+        {
+          controllers: this.modules.map(module => module.controllers),
+          middlewares: this.middlewares,
+          defaultErrorHandler: false,
+        },
+      );
+
+      const { host, port } = this.config;
+
+      const server = await new Promise<Server>((resolve, reject) => {
+        const server = this.express
           .listen(port, host, (err: any) => {
             if (err) {
               reject(err);
             }
-            resolve();
+            resolve(server);
           }).on('error', (err) => {
             reject(err);
           });
+      });
+      this.logger.info(`Server started at http://${host}:${port}`);
 
+      process.on('SIGTERM', () => {
+        this.logger.info('Got SIGTERM, stopping application');
+        server.close(() => {
+          this.end();
+        });
       });
     } catch (e) {
       this.logger.error(e);
-      process.exitCode = 1;
       await this.end();
-      return;
+      process.exit(1);
     }
-
-    this.logger.info(`Server started at http://${host}:${port}`);
   }
 
 }
