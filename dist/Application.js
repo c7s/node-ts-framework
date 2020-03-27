@@ -41,7 +41,12 @@ class Application {
             await this.end();
         }
         catch (e) {
-            this.logger.error(e);
+            if (!this.isInitialized) {
+                console.error(e);
+            }
+            else {
+                this.logger.error(e);
+            }
             await this.end();
             process.exit(1);
         }
